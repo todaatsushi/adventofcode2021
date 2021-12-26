@@ -1,5 +1,5 @@
-import getIncrementCountInNums from './getCount'
-import { testInputs, puzzleInputs } from './inputs'
+import getIncrementCountInNums from '../getCount'
+import { testInputs, puzzleInputs } from '../inputs'
 
 class TestCase {
   result: number
@@ -30,7 +30,7 @@ class TestCase {
   }
 }
 
-(() => {
+const testPart1 = () => {
   const purelyIncrementingInput: number[] = [1, 2, 3]  // 2 increments
   const purelyIncrementTest: TestCase = new TestCase(2, purelyIncrementingInput, "increment")
   purelyIncrementTest.test()
@@ -53,4 +53,7 @@ class TestCase {
 
   const testInputTest = new TestCase(7, testInputs, "example test")
   testInputTest.test()
-})()
+}
+
+export default testPart1
+
