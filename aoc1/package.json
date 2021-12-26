@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "npx ts-node src/tests.ts",
+    "solve": "npx ts-node src/app.ts"
   },
   "keywords": [],
   "author": "",
