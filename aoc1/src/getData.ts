@@ -9,7 +9,7 @@ const getDataWithWindow = (nums: number[], windowSize: number): number[] => {
 
   while (endIndex < nums.length) {
     aggregatedNums.push(nums.slice(startIndex, endIndex).reduce(
-      (acc: number, value: number): number => acc + value
+      (acc: number | typeof NaN, value: number): number => acc + value
     ))
     startIndex++
     endIndex++
