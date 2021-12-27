@@ -14,6 +14,5 @@ const testInput: string = `
 `
 
 const part2TestInputs: number[] = getInput(testInput)
-console.log(part2TestInputs)
 
 export { part2TestInputs }
