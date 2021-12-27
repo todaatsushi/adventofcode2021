@@ -31,6 +31,7 @@ class TestCase {
 }
 
 const testPart1 = () => {
+  console.log("Testing part 1: \n")
   const purelyIncrementingInput: number[] = [1, 2, 3]  // 2 increments
   const purelyIncrementTest: TestCase = new TestCase(2, purelyIncrementingInput, "increment")
   purelyIncrementTest.test()
