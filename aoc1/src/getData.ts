@@ -2,7 +2,6 @@ const getDataWithWindow = (nums: number[], windowSize: number): number[] => {
   let startIndex: number = 0
   let endIndex: number = windowSize
   let aggregatedNums: number[] = []
-  debugger
 
   if (endIndex > nums.length) {
     return []
