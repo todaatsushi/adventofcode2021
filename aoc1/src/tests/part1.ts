@@ -1,5 +1,5 @@
 import getIncrementCountInNums from '../getCount'
-import { testInputs, puzzleInputs } from '../inputs'
+import { part1TestInputs, part1PuzzleInputs } from '../inputs/inputs'
 
 class TestCase {
   result: number
@@ -51,8 +51,10 @@ const testPart1 = () => {
   const functionalTest = new TestCase(1, functionalInput, "full test")
   functionalTest.test()
 
-  const testInputTest = new TestCase(7, testInputs, "example test")
+  const testInputTest = new TestCase(7, part1TestInputs, "example test")
   testInputTest.test()
+
+  console.log("\n")
 }
 
 export default testPart1
