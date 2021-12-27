@@ -18,10 +18,18 @@ class AggregatorTestCase {
     console.log(`Correctly aggregated arr: expected and got ${this.expected}`)
   }
 
+  successful() {
+    return (
+      Array.isArray(this.expected) && Array.isArray(this.result)
+      && this.expected.length === this.result.length
+      && this.expected.every((val: number, index: number) => val === this.result[index])
+    )
+  }
+
   test() {
-    if (this.result !== this.expected) {
+    if (!this.successful()) {
       this.logError()
-    } else if (this.result === this.expected) {
+    } else {
       this.logSuccess()
     }
   }
@@ -30,7 +38,7 @@ class AggregatorTestCase {
 const testPart2 = () => {
   console.log("Testing part 2: \n")
   const numsToTotal: number[] = [1,2,3,1,2,3]
-  const numsToTotalTestCase: AggregatorTestCase = new AggregatorTestCase(numsToTotal, [6,6], 3)
+  const numsToTotalTestCase: AggregatorTestCase = new AggregatorTestCase(numsToTotal, [6,6,6,6,], 3)
   numsToTotalTestCase.test()
 
   const nullInputTestCase: AggregatorTestCase = new AggregatorTestCase([], [], 3)
