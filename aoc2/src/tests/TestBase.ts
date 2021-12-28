@@ -27,4 +27,16 @@ class TestBase {
   }
 }
 
-export default TestBase
+class TestGetPositionTestCase extends TestBase {
+  result: number
+  expected: number
+
+  constructor(inputString: string, expected: number, getFunc: Function) {
+    super()
+
+    this.expected = expected
+    this.result = getFunc(inputString)
+  }
+}
+
+export { TestBase, TestGetPositionTestCase }

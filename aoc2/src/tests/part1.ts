@@ -1,6 +1,6 @@
 import getInput from '../inputs/getInput'
 import rawTestInput from '../inputs/test'
-import TestBase from './TestBase'
+import { TestBase, TestGetPositionTestCase } from './TestBase'
 import Move from '../data/Move'
 import getPosition from '../data/getPosition'
 
@@ -30,18 +30,6 @@ class InputTestCase extends TestBase {
   }
 }
 
-class TestGetPositionTestCase extends TestBase {
-  result: number
-  expected: number
-
-  constructor(inputString: string, expected: number) {
-    super()
-
-    this.expected = expected
-    this.result = getPosition(inputString)
-  }
-}
-
 const testPart1 = () => {
   const expectedMoves = [
     new Move('forward', 5),
@@ -55,7 +43,7 @@ const testPart1 = () => {
   const testInputTestCase = new InputTestCase(expectedMoves, rawTestInput)
   testInputTestCase.test()
 
-  const testGetPositionTestCase = new TestGetPositionTestCase(rawTestInput, 150)
+  const testGetPositionTestCase = new TestGetPositionTestCase(rawTestInput, 150, getPosition)
   testGetPositionTestCase.test()
 }
 
