@@ -13,11 +13,15 @@ class TestBase {
     console.log(this.getSuccessString())
   }
 
+  resultIsExpected(): boolean {
+    return this.result === this.expected
+  }
+
   test() {
-    if (this.result !== this.expected) {
+    if (this.resultIsExpected() === false) {
       this.logError()
     }
-    else if (this.result === this.expected) {
+    else {
       this.logSuccess()
     }
   }
