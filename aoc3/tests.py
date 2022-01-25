@@ -49,5 +49,18 @@ class InputTestCase(unittest.TestCase):
                     self.TEST_OUTPUT[index]
                 )
 
+
+class GammaRateTestCase(unittest.TestCase):
+    def setUp(self):
+        self.TEST_OUTPUT = "10110"
+
+    def test_gamma_rate_calculator(self):
+        readings = adapters.Input(TEST_INPUT).get_clean_input()
+        gamma = adapters.Gamma().calculate(readings)
+
+        self.assertEqual(gamma.binary, self.TEST_OUTPUT)
+        self.assertEqual(gamma.percentage_value, 22)
+
+
 if __name__ == "__main__":
     unittest.main()
