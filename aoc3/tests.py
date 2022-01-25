@@ -35,8 +35,8 @@ class InputTestCase(unittest.TestCase):
         )
 
     def test_input_adapter(self):
-        adapter = InputAdapter(
-            raw_input=self.TEST_INPUT
+        adapter = adapters.Input(
+            raw_input=TEST_INPUT
         )
 
         cleaned_output = adapter.get_clean_input()

@@ -4,15 +4,14 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from beartype import beartype
-
-from interfaces.input import CleanedInput
+from interfaces import CleanedInput
 
 if TYPE_CHECKING:
     from typing import Optional
 
 
 @dataclass
-class InputAdapter:
+class Input:
     raw_input: str
     clean_input: Optional[CleanedInput] = None
 
