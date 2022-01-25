@@ -1,6 +1,7 @@
 .venv/
 .env
 tsconfig.json
+__pycache__/
 
 lib-cov
 *.seed
