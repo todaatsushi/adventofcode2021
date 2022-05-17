@@ -18,7 +18,17 @@ func ReadRawReadings(filename string) []Reading {
 	readingSlice := make([]Reading, 0)
 
 	for _, reading := range splitReadings {
-		readingSlice = append(readingSlice, Reading{value: reading})
+		newReading := Reading{}
+		var val int32
+		for _, char := range reading {
+			if int32(char) == 48 {
+				val = 0
+			} else {
+				val = 1
+			}
+			newReading.value = append(newReading.value, val)
+		}
+		readingSlice = append(readingSlice, newReading)
 	}
 	return readingSlice
 }
