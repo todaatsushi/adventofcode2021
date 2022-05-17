@@ -6,6 +6,7 @@ package cmd
 
 import (
 	"fmt"
+	"internal/readings"
 	"log"
 
 	"github.com/spf13/cobra"
@@ -26,7 +27,8 @@ var solveCmd = &cobra.Command{
 }
 
 func getPowerConsumption(filename string) {
-	fmt.Println("Solve using:", filename)
+	readings := readings.ReadRawReadings(filename)
+	fmt.Println(readings)
 }
 
 func init() {
