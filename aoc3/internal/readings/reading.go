@@ -3,10 +3,10 @@ package readings
 import "log"
 
 type Reading struct {
-	value []int32
+	value []int64
 }
 
-func (reading *Reading) pop() int32 {
+func (reading *Reading) pop() int64 {
 	if len(reading.value) == 0 {
 		log.Fatal("No values to pop")
 	}
@@ -15,6 +15,6 @@ func (reading *Reading) pop() int32 {
 	return first
 }
 
-func (reading *Reading) push(val int32) {
+func (reading *Reading) push(val int64) {
 	reading.value = append(reading.value, val)
 }
