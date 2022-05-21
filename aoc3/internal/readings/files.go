@@ -19,7 +19,7 @@ func ReadRawReadings(filename string) []Reading {
 
 	for _, reading := range splitReadings {
 		newReading := Reading{}
-		var val int32
+		var val int64
 		for _, char := range reading {
 			if int32(char) == 48 {
 				val = 0
