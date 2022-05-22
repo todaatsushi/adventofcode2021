@@ -41,3 +41,16 @@ func TestGetO2Readings(t *testing.T) {
 		t.Fatal("O2 readings didn't match expected:", intO2Reading, expected)
 	}
 }
+
+func TestGetCO2Readings(t *testing.T) {
+	allReadings := createTestReadings()
+	expected := int64(20)
+	CO2Reading := GetCO2Readings(allReadings, 0)
+	CO2ReadingStr := fmtRate(CO2Reading.value)
+	intCO2Reading, _ := strconv.ParseInt(CO2ReadingStr, 2, 64)
+
+	if intCO2Reading != expected {
+		t.Fatal("CO2 readings didn't match expected:", intCO2Reading, expected)
+	}
+
+}

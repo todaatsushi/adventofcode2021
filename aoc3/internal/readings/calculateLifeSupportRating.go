@@ -36,3 +36,18 @@ func GetO2Readings(readings []Reading, position int) Reading {
 	}
 	return GetO2Readings(o2Readings, position+1)
 }
+
+func GetCO2Readings(readings []Reading, position int) Reading {
+	if len(readings) == 1 {
+		return readings[0]
+	}
+	Co2Readings := make([]Reading, 0)
+	filter := getLeastCommonValueAtPosition(readings, position)
+
+	for _, reading := range readings {
+		if reading.value[position] == filter {
+			Co2Readings = append(Co2Readings, reading)
+		}
+	}
+	return GetCO2Readings(Co2Readings, position+1)
+}
