@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func fmtRate(rateSlice []int64) string {
+func fmtReadingValue(rateSlice []int64) string {
 	return strings.Trim(strings.Join(strings.Fields(fmt.Sprint(rateSlice)), ""), "[]")
 }
 
@@ -40,8 +40,8 @@ func getRawGammaAndEpsilon(allReadings []Reading) ([]int64, []int64) {
 
 func GetGammaAndEpsilon(allReadings []Reading) (int64, int64) {
 	gammaRateRaw, epsilonRateRaw := getRawGammaAndEpsilon(allReadings)
-	gammaRateString := fmtRate(gammaRateRaw)
-	epsilonRateString := fmtRate(epsilonRateRaw)
+	gammaRateString := fmtReadingValue(gammaRateRaw)
+	epsilonRateString := fmtReadingValue(epsilonRateRaw)
 
 	gammaRate, err := strconv.ParseInt(gammaRateString, 2, 64)
 	if err != nil {

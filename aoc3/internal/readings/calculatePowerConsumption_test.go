@@ -35,13 +35,13 @@ func TestGetRawEpsilonRate(t *testing.T) {
 	}
 }
 
-func TestFmtRate(t *testing.T) {
-	rateReading := []int64{0, 1, 1, 0, 0}
-	rateReadingString := fmtRate(rateReading)
+func TestFmtReadingValue(t *testing.T) {
+	valueReading := []int64{0, 1, 1, 0, 0}
+	valueReadingString := fmtReadingValue(valueReading)
 	expectedRateReadingString := "01100"
 
-	if rateReadingString != expectedRateReadingString {
-		t.Fatal("Rate reading not pasted correctly into a string expected '01100', got:", rateReadingString)
+	if valueReadingString != expectedRateReadingString {
+		t.Fatal("Rate reading not pasted correctly into a string expected '01100', got:", valueReadingString)
 	}
 }
 
