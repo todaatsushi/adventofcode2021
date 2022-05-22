@@ -17,6 +17,18 @@ func TestGetMostCommonValueAtPosition(t *testing.T) {
 		}
 	}
 }
+func TestGetLeastCommonValueAtPosition(t *testing.T) {
+	allReadings := createTestReadings()
+	expected := []int64{1, 0, 0}
+	var leastCommonValueAtPostion int64
+
+	for i := 0; i < 3; i++ {
+		leastCommonValueAtPostion = getLeastCommonValueAtPosition(allReadings, i)
+		if leastCommonValueAtPostion != expected[i] {
+			t.Fatal("Values don't match.", leastCommonValueAtPostion, expected[i])
+		}
+	}
+}
 
 func TestGetO2Readings(t *testing.T) {
 	allReadings := createTestReadings()

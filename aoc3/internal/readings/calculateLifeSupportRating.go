@@ -11,6 +11,17 @@ func getMostCommonValueAtPosition(readings []Reading, position int) int64 {
 	return max
 }
 
+func getLeastCommonValueAtPosition(readings []Reading, position int) int64 {
+	tally := Tally{one: 0, zero: 0}
+	tally.tallyReadingsAtPosition(readings, position)
+
+	max, err := tally.getMin()
+	if err != nil {
+		return 0
+	}
+	return max
+}
+
 func GetO2Readings(readings []Reading, position int) Reading {
 	if len(readings) == 1 {
 		return readings[0]
