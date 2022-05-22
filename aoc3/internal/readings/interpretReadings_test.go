@@ -1,6 +1,8 @@
 package readings
 
-import "testing"
+import (
+	"testing"
+)
 
 func createTestReadings() []Reading {
 	return []Reading{
@@ -41,4 +43,25 @@ func TestFmtRate(t *testing.T) {
 	if rateReadingString != expectedRateReadingString {
 		t.Fatal("Rate reading not pasted correctly into a string expected '01100', got:", rateReadingString)
 	}
+}
+
+func TestGetGammaRate(t *testing.T) {
+	allReadings := createTestReadings()
+	gammaRate, _ := GetGammaAndEpsilon(allReadings)
+	expectedGammaRate := 12
+
+	if gammaRate != int64(expectedGammaRate) {
+		t.Fatal("Gamme rate is not as expected. Expected 22, got ", gammaRate)
+	}
+}
+
+func TestGetEpsilonRate(t *testing.T) {
+	allReadings := createTestReadings()
+	_, epsilonRate := GetGammaAndEpsilon(allReadings)
+	expectedEpsilonRate := 19
+
+	if epsilonRate != int64(expectedEpsilonRate) {
+		t.Fatal("Epsilon rate is not as expected. Expected 9, got ", epsilonRate)
+	}
+
 }

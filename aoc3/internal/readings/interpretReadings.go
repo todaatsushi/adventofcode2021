@@ -34,3 +34,19 @@ func getRawGammaAndEpsilon(allReadings []Reading) ([]int64, []int64) {
 	}
 	return gammaRateRaw, epsilonRateRaw
 }
+
+func GetGammaAndEpsilon(allReadings []Reading) (int64, int64) {
+	gammaRateRaw, epsilonRateRaw := getRawGammaAndEpsilon(allReadings)
+	gammaRateString := fmtRate(gammaRateRaw)
+	epsilonRateString := fmtRate(epsilonRateRaw)
+
+	gammaRate, err := strconv.ParseInt(gammaRateString, 2, 64)
+	if err != nil {
+		log.Fatal("Couldn't convert gammaRateRaw", gammaRateString)
+	}
+	epsilonRate, err := strconv.ParseInt(epsilonRateString, 2, 64)
+	if err != nil {
+		log.Fatal("Couldn't convert epsilonRateRaw", epsilonRateString)
+	}
+	return gammaRate, epsilonRate
+}
