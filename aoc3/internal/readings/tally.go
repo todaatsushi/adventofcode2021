@@ -1,6 +1,8 @@
 package readings
 
-import "log"
+import (
+	"errors"
+)
 
 type Tally struct {
 	zero int64
@@ -12,23 +14,23 @@ func (tally *Tally) reset() {
 	tally.zero = 0
 }
 
-func (tally *Tally) getMax() int64 {
+func (tally *Tally) getMax() (int64, error) {
 	if tally.one == tally.zero {
-		log.Fatal("Can't handle same tally")
+		return -1, errors.New("Tally is equal")
 	}
 	if tally.one > tally.zero {
-		return 1
+		return 1, nil
 	}
-	return 0
+	return 0, nil
 }
 
-func (tally *Tally) getMin() int64 {
+func (tally *Tally) getMin() (int64, error) {
 	if tally.one == tally.zero {
-		log.Fatal("Can't handle same tally")
+		return -1, errors.New("Tally is equal")
 	}
 	if tally.one < tally.zero {
-		return 1
+		return 1, nil
 	}
-	return 0
+	return 0, nil
 
 }

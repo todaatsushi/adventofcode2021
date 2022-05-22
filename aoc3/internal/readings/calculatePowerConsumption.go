@@ -19,6 +19,10 @@ func getRawGammaAndEpsilon(allReadings []Reading) ([]int64, []int64) {
 	var bit int64
 	bits := len(allReadings[0].value)
 
+	var max int64
+	var min int64
+	var err error
+
 	for i := 0; i < bits; i++ {
 		tally.reset()
 		for _, reading := range allReadings {
@@ -29,8 +33,15 @@ func getRawGammaAndEpsilon(allReadings []Reading) ([]int64, []int64) {
 				tally.zero = tally.zero + 1
 			}
 		}
-		gammaRateRaw = append(gammaRateRaw, tally.getMax())
-		epsilonRateRaw = append(epsilonRateRaw, tally.getMin())
+		max, err = tally.getMax()
+		min, err = tally.getMin()
+
+		if err != nil {
+			log.Fatal("Couldn't get max or min.")
+		}
+
+		gammaRateRaw = append(gammaRateRaw, max)
+		epsilonRateRaw = append(epsilonRateRaw, min)
 	}
 	return gammaRateRaw, epsilonRateRaw
 }
