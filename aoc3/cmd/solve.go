@@ -27,8 +27,10 @@ var solveCmd = &cobra.Command{
 }
 
 func getPowerConsumption(filename string) {
-	readings := readings.ReadRawReadings(filename)
-	fmt.Println(readings)
+	allReadings := readings.ReadRawReadings(filename)
+	gamma, epsilon := readings.GetGammaAndEpsilon(allReadings)
+	powerConsumption := gamma * epsilon
+	fmt.Println("Power consumption from readings:", powerConsumption)
 }
 
 func init() {
