@@ -34,3 +34,16 @@ func (tally *Tally) getMin() (int64, error) {
 	return 0, nil
 
 }
+
+func (tally *Tally) tallyReadingsAtPosition(readings []Reading, position int) {
+	var bit int64
+
+	for _, reading := range readings {
+		bit = reading.value[position]
+		if bit == 1 {
+			tally.one += 1
+		} else {
+			tally.zero += 1
+		}
+	}
+}
