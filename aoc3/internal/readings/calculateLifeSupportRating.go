@@ -10,3 +10,18 @@ func getMostCommonValueAtPosition(readings []Reading, position int) int64 {
 	}
 	return max
 }
+
+func GetO2Readings(readings []Reading, position int) Reading {
+	if len(readings) == 1 {
+		return readings[0]
+	}
+	o2Readings := make([]Reading, 0)
+	filter := getMostCommonValueAtPosition(readings, position)
+
+	for _, reading := range readings {
+		if reading.value[position] == filter {
+			o2Readings = append(o2Readings, reading)
+		}
+	}
+	return GetO2Readings(o2Readings, position+1)
+}
