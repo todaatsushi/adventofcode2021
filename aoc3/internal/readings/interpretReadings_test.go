@@ -4,20 +4,19 @@ import "testing"
 
 func TestGetRawGammaRate(t *testing.T) {
 	allReadings := []Reading{
-		Reading{value: []int64{0, 1, 1, 0, 0}},
+		Reading{value: []int64{0, 1, 1, 0, 1}},
 		Reading{value: []int64{1, 0, 1, 0, 0}},
 		Reading{value: []int64{0, 1, 1, 0, 0}},
-		Reading{value: []int64{1, 0, 1, 1, 0}},
-		Reading{value: []int64{0, 1, 1, 0, 1}},
 	}
 
-	expectedGammaRateRaw := "11100"
+	expectedGammaRateRaw := []int64{0, 1, 1, 0, 0}
 	gammaRateRaw, _ := getRawGammaAndEpsilon(allReadings)
 
-	if expectedGammaRateRaw != gammaRateRaw {
-		t.Fatal("Different gamma rates calculated:", expectedGammaRateRaw, gammaRateRaw)
+	for i := 0; i < 5; i++ {
+		if expectedGammaRateRaw[i] != gammaRateRaw[i] {
+			t.Fatal("Different gamma rates calculated:", expectedGammaRateRaw, gammaRateRaw)
+		}
 	}
-
 }
 
 func TestGetRawEpsilonRate(t *testing.T) {
@@ -25,15 +24,13 @@ func TestGetRawEpsilonRate(t *testing.T) {
 		Reading{value: []int64{0, 1, 1, 0, 0}},
 		Reading{value: []int64{1, 0, 1, 0, 0}},
 		Reading{value: []int64{0, 1, 1, 0, 0}},
-		Reading{value: []int64{1, 0, 1, 1, 0}},
-		Reading{value: []int64{0, 1, 1, 0, 1}},
 	}
 
-	expectedEpsilonRateRaw := "00011"
+	expectedEpsilonRateRaw := []int64{1, 0, 0, 1, 1}
 	_, epsilonRateRaw := getRawGammaAndEpsilon(allReadings)
-
-	if expectedEpsilonRateRaw != epsilonRateRaw {
-		t.Fatal("Different epsilon rate rates calculated:", expectedEpsilonRateRaw, epsilonRateRaw)
+	for i := 0; i < 5; i++ {
+		if expectedEpsilonRateRaw[i] != epsilonRateRaw[i] {
+			t.Fatal("Different epsilon rates calculated:", expectedEpsilonRateRaw, epsilonRateRaw)
+		}
 	}
-
 }
