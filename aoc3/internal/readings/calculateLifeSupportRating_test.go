@@ -1,7 +1,6 @@
 package readings
 
 import (
-	"strconv"
 	"testing"
 )
 
@@ -30,27 +29,22 @@ func TestGetLeastCommonValueAtPosition(t *testing.T) {
 	}
 }
 
-func TestGetO2Readings(t *testing.T) {
+func TestGetO2Reading(t *testing.T) {
 	allReadings := createTestReadings()
 	expected := int64(13)
-	O2Reading := GetO2Readings(allReadings, 0)
-	O2ReadingStr := fmtRate(O2Reading.value)
-	intO2Reading, _ := strconv.ParseInt(O2ReadingStr, 2, 64)
-
-	if intO2Reading != expected {
-		t.Fatal("O2 readings didn't match expected:", intO2Reading, expected)
+	O2Reading := GetO2Reading(allReadings, 0)
+	if O2Reading != expected {
+		t.Fatal("O2 readings didn't match expected:", O2Reading, expected)
 	}
 }
 
 func TestGetCO2Readings(t *testing.T) {
 	allReadings := createTestReadings()
 	expected := int64(20)
-	CO2Reading := GetCO2Readings(allReadings, 0)
-	CO2ReadingStr := fmtRate(CO2Reading.value)
-	intCO2Reading, _ := strconv.ParseInt(CO2ReadingStr, 2, 64)
+	CO2Reading := GetCO2Reading(allReadings, 0)
 
-	if intCO2Reading != expected {
-		t.Fatal("CO2 readings didn't match expected:", intCO2Reading, expected)
+	if CO2Reading != expected {
+		t.Fatal("CO2 readings didn't match expected:", CO2Reading, expected)
 	}
 
 }

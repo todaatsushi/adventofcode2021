@@ -22,9 +22,9 @@ func getLeastCommonValueAtPosition(readings []Reading, position int) int64 {
 	return max
 }
 
-func GetO2Readings(readings []Reading, position int) Reading {
+func GetO2Reading(readings []Reading, position int) int64 {
 	if len(readings) == 1 {
-		return readings[0]
+		return readings[0].convertToInt()
 	}
 	o2Readings := make([]Reading, 0)
 	filter := getMostCommonValueAtPosition(readings, position)
@@ -34,12 +34,12 @@ func GetO2Readings(readings []Reading, position int) Reading {
 			o2Readings = append(o2Readings, reading)
 		}
 	}
-	return GetO2Readings(o2Readings, position+1)
+	return GetO2Reading(o2Readings, position+1)
 }
 
-func GetCO2Readings(readings []Reading, position int) Reading {
+func GetCO2Reading(readings []Reading, position int) int64 {
 	if len(readings) == 1 {
-		return readings[0]
+		return readings[0].convertToInt()
 	}
 	Co2Readings := make([]Reading, 0)
 	filter := getLeastCommonValueAtPosition(readings, position)
@@ -49,5 +49,5 @@ func GetCO2Readings(readings []Reading, position int) Reading {
 			Co2Readings = append(Co2Readings, reading)
 		}
 	}
-	return GetCO2Readings(Co2Readings, position+1)
+	return GetCO2Reading(Co2Readings, position+1)
 }
