@@ -16,8 +16,19 @@ func (tally *Tally) getMax() int64 {
 	if tally.one == tally.zero {
 		log.Fatal("Can't handle same tally")
 	}
+	if tally.one > tally.zero {
+		return 1
+	}
+	return 0
+}
+
+func (tally *Tally) getMin() int64 {
+	if tally.one == tally.zero {
+		log.Fatal("Can't handle same tally")
+	}
 	if tally.one < tally.zero {
 		return 1
 	}
 	return 0
+
 }
