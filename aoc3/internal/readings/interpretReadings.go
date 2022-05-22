@@ -1,5 +1,16 @@
 package readings
 
+import (
+	"fmt"
+	"log"
+	"strconv"
+	"strings"
+)
+
+func fmtRate(rateSlice []int64) string {
+	return strings.Trim(strings.Join(strings.Fields(fmt.Sprint(rateSlice)), ""), "[]")
+}
+
 func getRawGammaAndEpsilon(allReadings []Reading) ([]int64, []int64) {
 	gammaRateRaw := make([]int64, 0)
 	epsilonRateRaw := make([]int64, 0)
