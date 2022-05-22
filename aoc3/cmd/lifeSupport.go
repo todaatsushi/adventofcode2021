@@ -26,7 +26,12 @@ var lifeSupportCmd = &cobra.Command{
 
 func getLifeSupportRating(filename string) {
 	allReadings := readings.ReadRawReadings(filename)
-	fmt.Println(allReadings)
+	CO2Reading := readings.GetCO2Reading(allReadings, 0)
+	O2Reading := readings.GetO2Reading(allReadings, 0)
+
+	lifeSupportRating := CO2Reading * O2Reading
+	fmt.Println("Life support rating from readings:", lifeSupportRating)
+
 }
 
 func init() {
