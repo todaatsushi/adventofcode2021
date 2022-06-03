@@ -12,11 +12,18 @@ type Number struct {
 
 type Board struct {
 	nums [5][5]Number
+
+	rows [5]int
+	cols [5]int
+}
+
+func createEmptyCounts() [5]int {
+	return [5]int{0, 0, 0, 0, 0}
 }
 
 func newBoard(input string) Board {
 	rows := strings.Split(input, "\n")
-	board := Board{}
+	board := Board{rows: createEmptyCounts(), cols: createEmptyCounts()}
 
 	var vals []string
 	var boardNum Number
