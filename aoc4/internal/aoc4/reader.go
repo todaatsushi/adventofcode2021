@@ -14,11 +14,12 @@ func ReadInput(file string) {
 	}
 	bingoContent := string(content)
 	bingoContent = strings.TrimSpace(bingoContent)
-
 	splitContent := strings.Split(bingoContent, "\n\n")
-	fmt.Println(splitContent, len(splitContent))
-	for _, c := range splitContent {
-		fmt.Println(c)
-		fmt.Println()
+
+	bingoCalls := getCallQueue(splitContent[0])
+	fmt.Println("Got calls:", bingoCalls)
+
+	for _, i := range splitContent[1:] {
+		fmt.Println("Board:", newBoard(i))
 	}
 }
