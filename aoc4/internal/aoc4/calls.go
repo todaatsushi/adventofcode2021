@@ -18,5 +18,6 @@ func getCallQueue(inputs string) chan int {
 			callChannel <- callInt
 		}
 	}
+	close(callChannel)
 	return callChannel
 }
