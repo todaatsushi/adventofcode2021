@@ -17,9 +17,9 @@ func ReadInput(file string) {
 	splitContent := strings.Split(bingoContent, "\n\n")
 
 	bingoCalls := getCallQueue(splitContent[0])
-	fmt.Println("Got calls:", bingoCalls)
+	rawBoardInputs := splitContent[1:]
+	boards := getBoards(rawBoardInputs)
 
-	for _, i := range splitContent[1:] {
-		fmt.Println("Board:", newBoard(i))
-	}
+	fmt.Println("Got calls:", bingoCalls)
+	fmt.Println("Boards:", boards)
 }
