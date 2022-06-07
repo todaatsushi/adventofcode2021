@@ -19,19 +19,25 @@ func TestNewBoard(t *testing.T) {
 	}
 
 	board := newBoard(input)
-	var current Number
+	var current int
 	var expectedVal int
+	total := 0
 	for r := 0; r < 5; r++ {
 		for c := 0; c < 5; c++ {
 			current = board.nums[r][c]
 			expectedVal = expected[r][c]
 
-			if current.value != expectedVal {
+			if current != expectedVal {
 				t.Fatal("Values aren't the same:", current, expected[r][c])
 			}
-			if current.marked == true {
-				t.Fatalf("Marked should init as false")
-			}
+			total += current
 		}
+	}
+
+	if board.complete == true {
+		t.Fatal("Board is marked as complete when it shouldn't")
+	}
+	if board.score != total {
+		t.Fatal("Board total is incorrect.")
 	}
 }

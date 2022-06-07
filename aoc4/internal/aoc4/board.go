@@ -6,16 +6,17 @@ import (
 	"sync"
 )
 
-type Number struct {
-	value  int
-	marked bool
+type Board struct {
+	nums     [5][5]int
+	score    int
+	rows     [5]int
+	cols     [5]int
+	complete bool
 }
 
-type Board struct {
-	nums [5][5]Number
-
-	rows [5]int
-	cols [5]int
+	score int
+	rows  [5]int
+	cols  [5]int
 }
 
 func createEmptyCounts() [5]int {
@@ -24,10 +25,10 @@ func createEmptyCounts() [5]int {
 
 func newBoard(input string) Board {
 	rows := strings.Split(input, "\n")
-	board := Board{rows: createEmptyCounts(), cols: createEmptyCounts()}
+	board := Board{rows: createEmptyCounts(), cols: createEmptyCounts(), score: 0, complete: false}
 
 	var vals []string
-	var boardNum Number
+	var boardNum int
 	var colNum int
 	for rowNum, row := range rows {
 		row = strings.TrimSpace(row)
@@ -37,8 +38,9 @@ func newBoard(input string) Board {
 		for _, val := range vals {
 			numVal, err := strconv.Atoi(val)
 			if err == nil {
-				boardNum = Number{value: numVal, marked: false}
+				boardNum = numVal
 				board.nums[rowNum][colNum] = boardNum
+				board.score += boardNum
 				colNum++
 			}
 		}
