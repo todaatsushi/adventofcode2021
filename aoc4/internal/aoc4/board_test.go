@@ -41,3 +41,75 @@ func TestNewBoard(t *testing.T) {
 		t.Fatal("Board total is incorrect.")
 	}
 }
+
+func TestCheckBoard(t *testing.T) {
+	input := `22 13 17 11  0
+	 8  2 23  4 24
+	21  9 14 16  7
+	 6 10  3 18  5
+	 1 12 20 15 19`
+
+	board := newBoard(input)
+	board.check(22)
+
+	if board.score != (300 - 22) {
+		t.Fatal("Scores don't match up: ", board.score)
+	}
+	if board.complete == true {
+		t.Fatal("Shouldn't be marked as complete")
+	}
+	if board.rows[0] != 1 {
+		t.Fatal("Row count not incremented")
+	}
+	if board.cols[0] != 1 {
+		t.Fatal("Col count not incremented")
+	}
+}
+
+func TestCheckBoardCompleteRow(t *testing.T) {
+	input := `0 0 0 0 0
+	 1 1 1 1 1
+	 1 1 1 1 1
+	 1 1 1 1 1
+	 1 1 1 1 1`
+
+	board := newBoard(input)
+	board.check(0)
+
+	if board.score != 20 {
+		t.Fatal("Scores don't match up: ", board.score)
+	}
+	if board.complete == false {
+		t.Fatal("Should be marked as complete")
+	}
+	if board.rows[0] != 5 {
+		t.Fatal("Row count not completed")
+	}
+	if board.cols[0] != 1 {
+		t.Fatal("Col count not incremented")
+	}
+}
+
+func TestCheckBoardCompleteCol(t *testing.T) {
+	input := `0 1 1 1 1
+	 0 1 1 1 1
+	 0 1 1 1 1
+	 0 1 1 1 1
+	 0 1 1 1 1`
+
+	board := newBoard(input)
+	board.check(0)
+
+	if board.score != 20 {
+		t.Fatal("Scores don't match up: ", board.score)
+	}
+	if board.complete == false {
+		t.Fatal("Should be marked as complete")
+	}
+	if board.rows[0] != 1 {
+		t.Fatal("Row count not completed")
+	}
+	if board.cols[0] != 5 {
+		t.Fatal("Col count not incremented")
+	}
+}

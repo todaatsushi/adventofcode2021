@@ -14,9 +14,22 @@ type Board struct {
 	complete bool
 }
 
-	score int
-	rows  [5]int
-	cols  [5]int
+func (board *Board) check(number int) {
+	var current int
+	for r := 0; r < 5; r++ {
+		for c := 0; c < 5; c++ {
+			current = board.nums[r][c]
+			if number == current {
+				board.score -= current
+				board.rows[r] += 1
+				board.cols[c] += 1
+				if board.rows[r] == 5 || board.cols[c] == 5 {
+					board.complete = true
+					return
+				}
+			}
+		}
+	}
 }
 
 func createEmptyCounts() [5]int {
