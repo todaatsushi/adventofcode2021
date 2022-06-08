@@ -76,7 +76,7 @@ func TestCheckBoardCompleteRow(t *testing.T) {
 	board := newBoard(input)
 	board.check(0)
 
-	if board.score != 20 {
+	if board.score != 0 {
 		t.Fatal("Scores don't match up: ", board.score)
 	}
 	if board.complete == false {
@@ -100,7 +100,7 @@ func TestCheckBoardCompleteCol(t *testing.T) {
 	board := newBoard(input)
 	board.check(0)
 
-	if board.score != 20 {
+	if board.score != 0 {
 		t.Fatal("Scores don't match up: ", board.score)
 	}
 	if board.complete == false {

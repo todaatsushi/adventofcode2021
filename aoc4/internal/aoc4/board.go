@@ -29,6 +29,7 @@ func (board *Board) check(number int) {
 				board.cols[c] += 1
 				if board.rows[r] == 5 || board.cols[c] == 5 {
 					board.complete = true
+					board.score *= number
 					return
 				}
 			}
