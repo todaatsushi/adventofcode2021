@@ -16,6 +16,10 @@ type Board struct {
 
 func (board *Board) check(number int) {
 	var current int
+	if board.complete == true {
+		return
+	}
+
 	for r := 0; r < 5; r++ {
 		for c := 0; c < 5; c++ {
 			current = board.nums[r][c]
