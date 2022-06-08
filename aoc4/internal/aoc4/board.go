@@ -40,9 +40,9 @@ func createEmptyCounts() [5]int {
 	return [5]int{0, 0, 0, 0, 0}
 }
 
-func newBoard(input string) Board {
+func newBoard(input string) *Board {
 	rows := strings.Split(input, "\n")
-	board := Board{rows: createEmptyCounts(), cols: createEmptyCounts(), score: 0, complete: false}
+	board := &Board{rows: createEmptyCounts(), cols: createEmptyCounts(), score: 0, complete: false}
 
 	var vals []string
 	var boardNum int
@@ -65,8 +65,8 @@ func newBoard(input string) Board {
 	return board
 }
 
-func getBoards(inputs []string) []Board {
-	boards := make([]Board, len(inputs))
+func getBoards(inputs []string) []*Board {
+	boards := make([]*Board, len(inputs))
 	wg := sync.WaitGroup{}
 
 	for i, input := range inputs {
