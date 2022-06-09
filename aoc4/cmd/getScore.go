@@ -19,7 +19,8 @@ var getScoreCmd = &cobra.Command{
 		if filename == "" {
 			log.Fatal("Couldn't get filename:", filename, err)
 		}
-		aoc4.ReadInput(filename)
+		callsInput, boardsInput := aoc4.ReadInput(filename)
+		aoc4.PlayBingo(callsInput, boardsInput)
 	},
 }
 

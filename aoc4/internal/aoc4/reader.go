@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func ReadInput(file string) {
+func ReadInput(file string) (string, []string) {
 	content, err := os.ReadFile(file)
 	if err != nil {
 		log.Fatal("Couldn't read file")
@@ -15,11 +15,15 @@ func ReadInput(file string) {
 	bingoContent := string(content)
 	bingoContent = strings.TrimSpace(bingoContent)
 	splitContent := strings.Split(bingoContent, "\n\n")
+	return splitContent[0], splitContent[1:]
+}
 
-	bingoCalls := getCallQueue(splitContent[0])
-	rawBoardInputs := splitContent[1:]
-	boards := getBoards(rawBoardInputs)
+func PlayBingo(callsString string, boardsStrings []string) {
+	bingoCalls := getCallQueue(callsString)
+	boards := getBoards(boardsStrings)
 
-	fmt.Println("Got calls:", bingoCalls)
-	fmt.Println("Boards:", boards)
+	makeCalls(boards, bingoCalls)
+	for _, board := range boards {
+		fmt.Println("Board: ", board)
+	}
 }
