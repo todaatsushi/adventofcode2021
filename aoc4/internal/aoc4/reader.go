@@ -1,7 +1,6 @@
 package aoc4
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -23,7 +22,4 @@ func PlayBingo(callsString string, boardsStrings []string) {
 	boards := getBoards(boardsStrings)
 
 	makeCalls(boards, bingoCalls)
-	for _, board := range boards {
-		fmt.Println("Board: ", board)
-	}
 }

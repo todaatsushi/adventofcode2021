@@ -1,6 +1,7 @@
 package aoc4
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 	"sync"
@@ -30,6 +31,7 @@ func (board *Board) check(number int) {
 				if board.rows[r] == 5 || board.cols[c] == 5 {
 					board.complete = true
 					board.score *= number
+					fmt.Println("Board complete: score -", board.score)
 					return
 				}
 			}
