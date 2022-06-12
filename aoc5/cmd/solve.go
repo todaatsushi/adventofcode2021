@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"internal/aoc5"
+	"adventofcode2021/aoc5/internal/aoc5"
 	"log"
 
 	"github.com/spf13/cobra"
