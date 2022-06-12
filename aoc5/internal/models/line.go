@@ -1,6 +1,9 @@
 package models
 
-import "sync"
+import (
+	"adventofcode2021/aoc5/internal/utils"
+	"sync"
+)
 
 type Line struct {
 	start *Coordinate
@@ -22,4 +25,12 @@ func ReadLines(input []string) []*Line {
 
 	wg.Wait()
 	return lines
+}
+
+func (l *Line) getMaxX() int {
+	return utils.Max(l.start.x, l.end.x)
+}
+
+func (l *Line) getMaxY() int {
+	return utils.Max(l.start.y, l.end.y)
 }
