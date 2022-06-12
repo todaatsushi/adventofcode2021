@@ -14,3 +14,13 @@ func getGraphSize(lines []*Line) (int, int) {
 	}
 	return x, y
 }
+
+func CreateGraph(lines []*Line) [][]int {
+	xSize, ySize := getGraphSize(lines)
+	graph := make([][]int, xSize)
+
+	for i := 0; i < xSize; i++ {
+		graph[i] = make([]int, ySize)
+	}
+	return graph
+}

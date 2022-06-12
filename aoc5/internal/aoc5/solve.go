@@ -8,6 +8,7 @@ import (
 func Solve(filename string) {
 	input := readInput(filename)
 	lines := models.ReadLines(input)
+	graph := models.CreateGraph(lines)
 
-	fmt.Println(lines, len(lines))
+	fmt.Println(graph)
 }

@@ -19,3 +19,25 @@ func TestGetGraphSize(t *testing.T) {
 		t.Fatal("Expected 9 for max Y, got", y)
 	}
 }
+
+func TestCreateGraph(t *testing.T) {
+	input := []string{
+		"0,9 -> 5,9",
+		"8,0 -> 0,8",
+		"8,0 -> 0,8",
+		"9,4 -> 3,4",
+	}
+	lines := ReadLines(input)
+	graph := CreateGraph(lines)
+
+	for r := 0; r < 9; r++ {
+		if len(graph[r]) != 9 {
+			t.Fatal("Graph row should have 9 cols in it, got:", len(graph[r]))
+		}
+	}
+
+	if len(graph) != 9 {
+		t.Fatal("Graph should have 9 rows in it, got:", len(graph))
+	}
+
+}
