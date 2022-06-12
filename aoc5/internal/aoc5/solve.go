@@ -1,8 +1,13 @@
 package aoc5
 
-import "fmt"
+import (
+	"adventofcode2021/aoc5/internal/models"
+	"fmt"
+)
 
 func Solve(filename string) {
 	input := readInput(filename)
-	fmt.Println(input)
+	lines := models.ReadLines(input)
+
+	fmt.Println(lines, len(lines))
 }
