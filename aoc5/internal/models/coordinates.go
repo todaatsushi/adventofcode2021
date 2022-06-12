@@ -1,4 +1,4 @@
-package aoc5
+package models
 
 import (
 	"log"

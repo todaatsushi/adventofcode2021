@@ -1,4 +1,4 @@
-package aoc5
+package models
 
 import "sync"
 
@@ -7,7 +7,7 @@ type Line struct {
 	end   *Coordinate
 }
 
-func readLines(input []string) []*Line {
+func ReadLines(input []string) []*Line {
 	lines := make([]*Line, len(input))
 	wg := sync.WaitGroup{}
 
