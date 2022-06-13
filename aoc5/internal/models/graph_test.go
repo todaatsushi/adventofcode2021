@@ -43,6 +43,14 @@ func TestGraphHelpers(t *testing.T) {
 			t.Fatal("Graph should have 9 rows in it, got:", len(*graph))
 		}
 
+		for r := 0; r < 9; r++ {
+			for c := 0; c < 9; c++ {
+				if (*graph)[r][c] != 0 {
+					t.Fatal("Slice value should init at 0, got:", (*graph)[r][c])
+				}
+			}
+		}
+
 	})
 }
 
