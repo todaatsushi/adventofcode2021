@@ -149,7 +149,7 @@ func TestGraphReading(t *testing.T) {
 	t.Run("Test get tallies from graph after read", func(t *testing.T) {
 		input := []string{
 			"0,0 -> 0,9",
-			"0,0 -> 9,0",
+			"9,0 -> 0,0",
 		}
 		lines := ReadLines(input)
 		graph := CreateGraph(lines)
