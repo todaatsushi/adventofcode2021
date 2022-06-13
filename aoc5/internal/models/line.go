@@ -6,8 +6,15 @@ import (
 )
 
 type Line struct {
-	start *Coordinate
-	end   *Coordinate
+	start      *Coordinate
+	end        *Coordinate
+	isVertical bool
+}
+
+func newLine(start *Coordinate, end *Coordinate) *Line {
+	isVertical := start.x == end.x
+
+	return &Line{start: start, end: end, isVertical: isVertical}
 }
 
 func ReadLines(input []string) []*Line {
@@ -19,7 +26,7 @@ func ReadLines(input []string) []*Line {
 		go func(lines []*Line, i int, coords string) {
 			defer wg.Done()
 			start, end := readCoordinates(coords)
-			lines[i] = &Line{start: start, end: end}
+			lines[i] = newLine(start, end)
 		}(lines, i, coords)
 	}
 
