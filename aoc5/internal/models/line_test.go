@@ -2,21 +2,21 @@ package models
 
 import "testing"
 
-func TestReadLines(t *testing.T) {
-	input := []string{
-		"0,9 -> 5,9",
-		"8,0 -> 0,8",
-		"8,0 -> 0,8",
-		"9,4 -> 3,4",
-	}
-	lines := ReadLines(input)
+func TestLine(t *testing.T) {
+	t.Run("Test read lines from input", func(t *testing.T) {
+		input := []string{
+			"0,9 -> 5,9",
+			"8,0 -> 0,8",
+			"8,0 -> 0,8",
+			"9,4 -> 3,4",
+		}
+		lines := ReadLines(input)
 
-	if len(lines) != 4 {
-		t.Fatal("Unexpected number of lines:", len(lines))
-	}
-}
+		if len(lines) != 4 {
+			t.Fatal("Unexpected number of lines:", len(lines))
+		}
+	})
 
-func TestNewLine(t *testing.T) {
 	t.Run("Test new vertical line", func(t *testing.T) {
 		start := &Coordinate{x: 0, y: 0}
 		end := &Coordinate{x: 0, y: 10}
@@ -52,5 +52,4 @@ func TestNewLine(t *testing.T) {
 			t.Fatal("Line should not be marked as vertical")
 		}
 	})
-
 }
