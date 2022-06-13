@@ -37,16 +37,7 @@ func (g *Graph) getSize() (int, int) {
 }
 
 func (g *Graph) drawLine(l *Line) {
-	var startPoint *Coordinate
-	var endPoint *Coordinate
-
-	if l.isReversed {
-		startPoint = l.end
-		endPoint = l.start
-	} else {
-		startPoint = l.start
-		endPoint = l.end
-	}
+	startPoint, endPoint := g.getStartAndEndPoints(l)
 
 	if l.isVertical {
 		for i := startPoint.y; i <= endPoint.y; i++ {
@@ -57,7 +48,6 @@ func (g *Graph) drawLine(l *Line) {
 			(*g).points[i][l.start.y] += 1
 		}
 	}
-
 }
 
 func (g *Graph) ReadLines() {
@@ -112,5 +102,18 @@ func (g *Graph) PointsWithOverXNumberOfLines(x int) int {
 		}
 	}
 	return count
+}
 
+func (g *Graph) getStartAndEndPoints(l *Line) (*Coordinate, *Coordinate) {
+	var startPoint *Coordinate
+	var endPoint *Coordinate
+
+	if l.isReversed {
+		startPoint = l.end
+		endPoint = l.start
+	} else {
+		startPoint = l.start
+		endPoint = l.end
+	}
+	return startPoint, endPoint
 }
