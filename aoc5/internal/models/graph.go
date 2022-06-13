@@ -24,3 +24,21 @@ func CreateGraph(lines []*Line) *[][]int {
 	}
 	return &graph
 }
+
+func drawLine(graph *[][]int, line *Line) {
+	if line.isVertical {
+		for i := line.start.y; i <= line.end.y; i++ {
+			(*graph)[line.start.x][i] += 1
+		}
+	} else {
+		for i := line.start.x; i <= line.end.x; i++ {
+			(*graph)[i][line.start.y] += 1
+		}
+	}
+}
+
+func ReadLinesToGraph(graph *[][]int, lines []*Line) {
+	for _, l := range lines {
+		drawLine(graph, l)
+	}
+}
