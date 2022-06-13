@@ -6,15 +6,18 @@ import (
 )
 
 type Line struct {
-	start      *Coordinate
-	end        *Coordinate
+	start *Coordinate
+	end   *Coordinate
+
 	isVertical bool
+	isReversed bool
 }
 
 func newLine(start *Coordinate, end *Coordinate) *Line {
 	isVertical := start.x == end.x
+	isReversed := start.x > end.x || start.y > end.y
 
-	return &Line{start: start, end: end, isVertical: isVertical}
+	return &Line{start: start, end: end, isVertical: isVertical, isReversed: isReversed}
 }
 
 func ReadLines(input []string) []*Line {

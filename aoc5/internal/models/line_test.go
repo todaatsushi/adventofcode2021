@@ -33,9 +33,54 @@ func TestLine(t *testing.T) {
 		if line.isVertical == false {
 			t.Fatal("Line should be marked as vertical")
 		}
+		if line.isReversed == true {
+			t.Fatal("Line should not be marked as reversed")
+		}
 	})
 
 	t.Run("Test new horizontal line", func(t *testing.T) {
+		start := &Coordinate{x: 0, y: 10}
+		end := &Coordinate{x: 10, y: 10}
+
+		line := newLine(start, end)
+
+		if line.start != start {
+			t.Fatal("Line start coord is not the start coord")
+		}
+		if line.end != end {
+			t.Fatal("Line start coord is not the start coord")
+		}
+
+		if line.isVertical == true {
+			t.Fatal("Line should not be marked as vertical")
+		}
+		if line.isReversed == true {
+			t.Fatal("Line should not be marked as reversed")
+		}
+	})
+
+	t.Run("Test new line reverse horizontal line", func(t *testing.T) {
+		start := &Coordinate{x: 0, y: 10}
+		end := &Coordinate{x: 0, y: 0}
+
+		line := newLine(start, end)
+
+		if line.start != start {
+			t.Fatal("Line start coord is not the start coord")
+		}
+		if line.end != end {
+			t.Fatal("Line start coord is not the start coord")
+		}
+
+		if line.isVertical == false {
+			t.Fatal("Line should be marked as vertical")
+		}
+		if line.isReversed == false {
+			t.Fatal("Line should be marked as reversed")
+		}
+	})
+
+	t.Run("Test new line reverse vertical line", func(t *testing.T) {
 		start := &Coordinate{x: 10, y: 10}
 		end := &Coordinate{x: 0, y: 10}
 
@@ -50,6 +95,9 @@ func TestLine(t *testing.T) {
 
 		if line.isVertical == true {
 			t.Fatal("Line should not be marked as vertical")
+		}
+		if line.isReversed == false {
+			t.Fatal("Line should be marked as reversed")
 		}
 	})
 }
