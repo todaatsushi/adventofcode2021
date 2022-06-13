@@ -2,7 +2,24 @@ package models
 
 import (
 	"adventofcode2021/aoc5/internal/utils"
+	"fmt"
 )
+
+type Graph struct {
+	points [][]int
+	lines  []*Line
+}
+
+func NewGraph(lines []*Line) *Graph {
+	xSize, ySize := getGraphSize(lines)
+	points := make([][]int, xSize)
+
+	for i := 0; i < xSize; i++ {
+		points[i] = make([]int, ySize)
+	}
+	graph := Graph{lines: lines, points: points}
+	return &graph
+}
 
 func getGraphSize(lines []*Line) (int, int) {
 	x := 0
@@ -15,53 +32,58 @@ func getGraphSize(lines []*Line) (int, int) {
 	return x + 1, y + 1
 }
 
-func CreateGraph(lines []*Line) *[][]int {
-	xSize, ySize := getGraphSize(lines)
-	graph := make([][]int, xSize)
-
-	for i := 0; i < xSize; i++ {
-		graph[i] = make([]int, ySize)
-	}
-	return &graph
+func (g *Graph) getSize() (int, int) {
+	return getGraphSize(g.lines)
 }
 
-func drawLine(graph *[][]int, line *Line) {
+func (g *Graph) drawLine(l *Line) {
 	var startPoint *Coordinate
 	var endPoint *Coordinate
 
-	if line.isReversed {
-		startPoint = line.end
-		endPoint = line.start
+	if l.isReversed {
+		startPoint = l.end
+		endPoint = l.start
 	} else {
-		startPoint = line.start
-		endPoint = line.end
+		startPoint = l.start
+		endPoint = l.end
 	}
 
-	if line.isVertical {
+	if l.isVertical {
 		for i := startPoint.y; i <= endPoint.y; i++ {
-			(*graph)[startPoint.x][i] += 1
+			(*g).points[startPoint.x][i] += 1
 		}
 	} else {
 		for i := startPoint.x; i <= endPoint.x; i++ {
-			(*graph)[i][line.start.y] += 1
+			(*g).points[i][l.start.y] += 1
+		}
+	}
+
+}
+
+func (g *Graph) ReadLines() {
+	for _, l := range g.lines {
+		if l.isStraight() == true {
+			g.drawLine(l)
 		}
 	}
 }
 
-func ReadLinesToGraph(graph *[][]int, lines []*Line) {
-	for _, l := range lines {
-		drawLine(graph, l)
+func (g *Graph) Print() {
+	for r := len((*g).points) - 1; r > 0; r-- {
+		fmt.Println((*g).points[r])
 	}
+
 }
 
-func GetPointsWithValOverX(graph *[][]int, x int) int {
+func (g *Graph) PointsWithOverXNumberOfLines(x int) int {
 	count := 0
-	for r := 0; r < 10; r++ {
-		for c := 0; c < 10; c++ {
-			if (*graph)[r][c] >= x {
+	for r := 0; r < len((*g).points); r++ {
+		for c := 0; c < len((*g).points[r]); c++ {
+			if (*g).points[r][c] >= x {
 				count += 1
 			}
 		}
 	}
 	return count
+
 }
