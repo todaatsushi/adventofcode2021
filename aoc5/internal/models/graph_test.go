@@ -115,4 +115,35 @@ func TestGraphReading(t *testing.T) {
 			}
 		}
 	})
+
+	t.Run("Test get tallies from graph after read", func(t *testing.T) {
+		input := []string{
+			"0,0 -> 0,9",
+			"0,0 -> 9,0",
+		}
+		lines := ReadLines(input)
+		graph := CreateGraph(lines)
+		ReadLinesToGraph(graph, lines)
+
+		pointsOver2 := 1
+		pointsOver1 := 19
+		pointsOver10 := 0
+		vals := []int{2, 1, 10}
+
+		expectedCounts := []int{pointsOver2, pointsOver1, pointsOver10}
+		actualCounts := make([]int, 3)
+
+		var c int
+		for i, v := range vals {
+			c = GetPointsWithValOverX(graph, v)
+			actualCounts[i] = c
+		}
+
+		for i, ans := range actualCounts {
+			if ans != expectedCounts[i] {
+				t.Fatalf("Tally for val %d incorrect - expected %d, got %d", vals[i], expectedCounts[i], ans)
+			}
+		}
+
+	})
 }

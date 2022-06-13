@@ -42,3 +42,15 @@ func ReadLinesToGraph(graph *[][]int, lines []*Line) {
 		drawLine(graph, l)
 	}
 }
+
+func GetPointsWithValOverX(graph *[][]int, x int) int {
+	count := 0
+	for r := 0; r < 10; r++ {
+		for c := 0; c < 10; c++ {
+			if (*graph)[r][c] >= x {
+				count += 1
+			}
+		}
+	}
+	return count
+}
