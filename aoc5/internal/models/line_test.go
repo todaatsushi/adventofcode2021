@@ -100,4 +100,23 @@ func TestLine(t *testing.T) {
 			t.Fatal("Line should be marked as reversed")
 		}
 	})
+
+	t.Run("Test is straight method", func(t *testing.T) {
+		startStraight := &Coordinate{x: 10, y: 10}
+		endStraight := &Coordinate{x: 0, y: 10}
+
+		startNotStraight := &Coordinate{x: 10, y: 100}
+		endNotStraight := &Coordinate{x: 1, y: 10}
+
+		straightLine := newLine(startStraight, endStraight)
+		notStraightLine := newLine(startNotStraight, endNotStraight)
+
+		if straightLine.isStraight() == false {
+			t.Fatal("Line should be evaluated as straight")
+		}
+		if notStraightLine.isStraight() == true {
+			t.Fatal("Line shouldn't be evaluated as straight")
+		}
+
+	})
 }

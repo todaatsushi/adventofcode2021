@@ -44,3 +44,7 @@ func (l *Line) getMaxX() int {
 func (l *Line) getMaxY() int {
 	return utils.Max(l.start.y, l.end.y)
 }
+
+func (l *Line) isStraight() bool {
+	return l.start.x == l.end.x || l.start.y == l.end.y
+}
