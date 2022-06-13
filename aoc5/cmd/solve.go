@@ -15,11 +15,17 @@ var solveCmd = &cobra.Command{
 		if filename == "" || err != nil {
 			log.Fatal("Couldn't get filename:", filename, err)
 		}
-		aoc5.Solve(filename)
+
+		val, err := flags.GetInt("value")
+		if err != nil {
+			log.Fatal("Couldn't get value:", err)
+		}
+		aoc5.Solve(filename, val)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(solveCmd)
 	solveCmd.Flags().StringP("file", "f", "", "Input file")
+	solveCmd.Flags().IntP("value", "v", 420, "Which value to check the tally of")
 }

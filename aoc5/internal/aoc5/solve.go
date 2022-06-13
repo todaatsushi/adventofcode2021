@@ -5,10 +5,13 @@ import (
 	"fmt"
 )
 
-func Solve(filename string) {
+func Solve(filename string, val int) {
 	input := readInput(filename)
 	lines := models.ReadLines(input)
 	graph := models.CreateGraph(lines)
 
-	fmt.Println(graph)
+	models.ReadLinesToGraph(graph, lines)
+	tally := models.GetPointsWithValOverX(graph, val)
+
+	fmt.Printf("Number of points in graph over %d is %d\n", val, tally)
 }
