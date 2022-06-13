@@ -8,10 +8,11 @@ import (
 func Solve(filename string, val int) {
 	input := readInput(filename)
 	lines := models.ReadLines(input)
-	graph := models.CreateGraph(lines)
+	graph := models.NewGraph(lines)
 
-	models.ReadLinesToGraph(graph, lines)
-	tally := models.GetPointsWithValOverX(graph, val)
+	graph.ReadLines()
+	tally := graph.PointsWithOverXNumberOfLines(val)
 
 	fmt.Printf("Number of points in graph over %d is %d\n", val, tally)
+	graph.Describe(false)
 }
