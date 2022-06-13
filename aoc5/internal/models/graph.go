@@ -26,12 +26,23 @@ func CreateGraph(lines []*Line) *[][]int {
 }
 
 func drawLine(graph *[][]int, line *Line) {
+	var startPoint *Coordinate
+	var endPoint *Coordinate
+
+	if line.isReversed {
+		startPoint = line.end
+		endPoint = line.start
+	} else {
+		startPoint = line.start
+		endPoint = line.end
+	}
+
 	if line.isVertical {
-		for i := line.start.y; i <= line.end.y; i++ {
-			(*graph)[line.start.x][i] += 1
+		for i := startPoint.y; i <= endPoint.y; i++ {
+			(*graph)[startPoint.x][i] += 1
 		}
 	} else {
-		for i := line.start.x; i <= line.end.x; i++ {
+		for i := startPoint.x; i <= endPoint.x; i++ {
 			(*graph)[i][line.start.y] += 1
 		}
 	}

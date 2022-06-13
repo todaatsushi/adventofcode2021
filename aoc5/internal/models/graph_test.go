@@ -86,6 +86,36 @@ func TestGraphReading(t *testing.T) {
 
 	})
 
+	t.Run("Test draw backwards vertical line", func(t *testing.T) {
+		input := []string{
+			"0,9 -> 0,0",
+		}
+		lines := ReadLines(input)
+		graph := CreateGraph(lines)
+		ReadLinesToGraph(graph, lines)
+
+		for i := 0; i < 9; i++ {
+			if (*graph)[0][i] != 1 {
+				t.Fatalf("Expected init value of %d at %d,%d. Got %v", 1, 0, i, (*graph)[0][i])
+			}
+		}
+	})
+
+	t.Run("Test draw backwards horizontal line", func(t *testing.T) {
+		input := []string{
+			"9,0 -> 0,0",
+		}
+		lines := ReadLines(input)
+		graph := CreateGraph(lines)
+		ReadLinesToGraph(graph, lines)
+
+		for i := 0; i < 9; i++ {
+			if (*graph)[i][0] != 1 {
+				t.Fatalf("Expected init value of %d at %d,%d. Got %v", 1, 0, i, (*graph)[0][i])
+			}
+		}
+	})
+
 	t.Run("Test draw multiple lines", func(t *testing.T) {
 		input := []string{
 			"0,0 -> 0,9",
