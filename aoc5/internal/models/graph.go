@@ -12,7 +12,7 @@ func getGraphSize(lines []*Line) (int, int) {
 		x = utils.Max(x, l.getMaxX())
 		y = utils.Max(y, l.getMaxY())
 	}
-	return x, y
+	return x + 1, y + 1
 }
 
 func CreateGraph(lines []*Line) *[][]int {

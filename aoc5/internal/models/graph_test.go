@@ -15,11 +15,11 @@ func TestGraphHelpers(t *testing.T) {
 		lines := ReadLines(input)
 
 		x, y := getGraphSize(lines)
-		if x != 9 {
-			t.Fatal("Expected 9 for max X, got", x)
+		if x != 10 {
+			t.Fatal("Expected 10 for max X, got", x)
 		}
-		if y != 9 {
-			t.Fatal("Expected 9 for max Y, got", y)
+		if y != 10 {
+			t.Fatal("Expected 10 for max Y, got", y)
 		}
 	})
 
@@ -33,18 +33,18 @@ func TestGraphHelpers(t *testing.T) {
 		lines := ReadLines(input)
 		graph := CreateGraph(lines)
 
-		for r := 0; r < 9; r++ {
-			if len((*graph)[r]) != 9 {
-				t.Fatal("Graph row should have 9 cols in it, got:", len((*graph)[r]))
+		for r := 0; r < 10; r++ {
+			if len((*graph)[r]) != 10 {
+				t.Fatal("Graph row should have 10 cols in it, got:", len((*graph)[r]))
 			}
 		}
 
-		if len(*graph) != 9 {
-			t.Fatal("Graph should have 9 rows in it, got:", len(*graph))
+		if len(*graph) != 10 {
+			t.Fatal("Graph should have 10 rows in it, got:", len(*graph))
 		}
 
-		for r := 0; r < 9; r++ {
-			for c := 0; c < 9; c++ {
+		for r := 0; r < 10; r++ {
+			for c := 0; c < 10; c++ {
 				if (*graph)[r][c] != 0 {
 					t.Fatal("Slice value should init at 0, got:", (*graph)[r][c])
 				}
