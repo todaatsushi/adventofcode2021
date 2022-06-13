@@ -68,11 +68,38 @@ func (g *Graph) ReadLines() {
 	}
 }
 
-func (g *Graph) Print() {
-	for r := len((*g).points) - 1; r > 0; r-- {
-		fmt.Println((*g).points[r])
+func (g *Graph) print(pretty bool) {
+	for r := 0; r < len((*g).points); r++ {
+		for c := 0; c < len((*g).points[r]); c++ {
+			if pretty == true {
+				fmt.Printf("%d ", (*g).points[c][r])
+			} else {
+				fmt.Printf("%d ", (*g).points[r][c])
+			}
+		}
+		fmt.Print("\n")
 	}
+}
 
+func (g *Graph) Describe(showGraph bool) {
+	straightLines := 0
+	for _, l := range g.lines {
+		if l.isStraight() {
+			straightLines += 1
+		}
+	}
+	fmt.Printf("No lines: %d, straight lines: %d\n", len(g.lines), straightLines)
+
+	across, down := g.getSize()
+	fmt.Printf("Graph size: %d across, %d down\n", across, down)
+
+	if showGraph == true {
+		fmt.Println("Graph clean:")
+		g.print(true)
+
+		fmt.Println("Graph raw:")
+		g.print(false)
+	}
 }
 
 func (g *Graph) PointsWithOverXNumberOfLines(x int) int {

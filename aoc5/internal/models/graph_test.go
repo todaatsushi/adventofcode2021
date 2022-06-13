@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -148,6 +149,8 @@ func TestGraphReading(t *testing.T) {
 		for r := 0; r < 10; r++ {
 			for c := 0; c < 10; c++ {
 				if (*graph).points[r][c] != expected[r][c] {
+					fmt.Println("Graph incorrect:")
+					graph.Describe(true)
 					t.Fatalf("Graph val @(%d, %d) different - got %d, expected %d", r, c, (*graph).points[r][c], expected[r][c])
 				}
 			}
