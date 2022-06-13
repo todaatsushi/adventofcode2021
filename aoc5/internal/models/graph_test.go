@@ -185,6 +185,5 @@ func TestGraphReading(t *testing.T) {
 				t.Fatalf("Tally for val %d incorrect - expected %d, got %d", vals[i], expectedCounts[i], ans)
 			}
 		}
-
 	})
 }
