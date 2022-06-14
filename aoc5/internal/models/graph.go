@@ -39,20 +39,25 @@ func (g *Graph) getSize() (int, int) {
 func (g *Graph) drawLine(l *Line) {
 	startPoint, endPoint := g.getStartAndEndPoints(l)
 
-	if l.isVertical {
-		for i := startPoint.y; i <= endPoint.y; i++ {
-			(*g).points[startPoint.x][i] += 1
-		}
-	} else {
-		for i := startPoint.x; i <= endPoint.x; i++ {
-			(*g).points[i][l.start.y] += 1
+	if l.isStraight() {
+
+		if l.isVertical {
+			for i := startPoint.y; i <= endPoint.y; i++ {
+				(*g).points[startPoint.x][i] += 1
+			}
+		} else {
+			for i := startPoint.x; i <= endPoint.x; i++ {
+				(*g).points[i][l.start.y] += 1
+			}
 		}
 	}
 }
 
-func (g *Graph) ReadLines() {
+func (g *Graph) ReadLines(withDiagonals bool) {
+	var shouldDraw bool
 	for _, l := range g.lines {
-		if l.isStraight() == true {
+		shouldDraw = (l.isStraight() && withDiagonals == false) || withDiagonals == true
+		if shouldDraw {
 			g.drawLine(l)
 		}
 	}

@@ -20,7 +20,13 @@ var solveCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal("Couldn't get value:", err)
 		}
-		aoc5.Solve(filename, val)
+
+		withDiagonals, err := flags.GetBool("value")
+		if err != nil {
+			log.Fatal("Couldn't get flag:", err)
+		}
+
+		aoc5.Solve(filename, val, withDiagonals)
 	},
 }
 
@@ -28,4 +34,5 @@ func init() {
 	rootCmd.AddCommand(solveCmd)
 	solveCmd.Flags().StringP("file", "f", "", "Input file")
 	solveCmd.Flags().IntP("value", "v", 420, "Which value to check the tally of")
+	solveCmd.Flags().BoolP("with-diagonals", "d", true, "Count diagonal lines in totals")
 }

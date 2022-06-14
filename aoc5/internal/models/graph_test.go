@@ -62,7 +62,7 @@ func TestGraphReading(t *testing.T) {
 		}
 		lines := ReadLines(input)
 		graph := NewGraph(lines)
-		graph.ReadLines()
+		graph.ReadLines(true)
 
 		for i := 0; i < 9; i++ {
 			if (*graph).points[0][i] != 1 {
@@ -77,14 +77,13 @@ func TestGraphReading(t *testing.T) {
 		}
 		lines := ReadLines(input)
 		graph := NewGraph(lines)
-		graph.ReadLines()
+		graph.ReadLines(true)
 
 		for i := 0; i < 9; i++ {
 			if (*graph).points[i][0] != 1 {
 				t.Fatalf("Expected init value of %d at %d,%d. Got %v", 1, 0, i, (*graph).points[0][i])
 			}
 		}
-
 	})
 
 	t.Run("Test draw backwards vertical line", func(t *testing.T) {
@@ -93,7 +92,7 @@ func TestGraphReading(t *testing.T) {
 		}
 		lines := ReadLines(input)
 		graph := NewGraph(lines)
-		graph.ReadLines()
+		graph.ReadLines(true)
 
 		for i := 0; i < 9; i++ {
 			if (*graph).points[0][i] != 1 {
@@ -108,7 +107,7 @@ func TestGraphReading(t *testing.T) {
 		}
 		lines := ReadLines(input)
 		graph := NewGraph(lines)
-		graph.ReadLines()
+		graph.ReadLines(true)
 
 		for i := 0; i < 9; i++ {
 			if (*graph).points[i][0] != 1 {
@@ -117,7 +116,7 @@ func TestGraphReading(t *testing.T) {
 		}
 	})
 
-	t.Run("Test draw multiple lines", func(t *testing.T) {
+	t.Run("Test draw multiple lines no diagonals", func(t *testing.T) {
 		input := []string{
 			"0,9 -> 5,9",
 			"8,0 -> 0,8",
@@ -132,7 +131,7 @@ func TestGraphReading(t *testing.T) {
 		}
 		lines := ReadLines(input)
 		graph := NewGraph(lines)
-		graph.ReadLines()
+		graph.ReadLines(false)
 
 		expected := [10][10]int{
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
@@ -164,7 +163,7 @@ func TestGraphReading(t *testing.T) {
 		}
 		lines := ReadLines(input)
 		graph := NewGraph(lines)
-		graph.ReadLines()
+		graph.ReadLines(true)
 
 		pointsOver2 := 1
 		pointsOver1 := 19
