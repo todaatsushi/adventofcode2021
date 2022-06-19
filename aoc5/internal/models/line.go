@@ -48,3 +48,17 @@ func (l *Line) getMaxY() int {
 func (l *Line) isStraight() bool {
 	return l.start.x == l.end.x || l.start.y == l.end.y
 }
+
+func (l *Line) getStartAndEndPoints() (*Coordinate, *Coordinate) {
+	var startPoint *Coordinate
+	var endPoint *Coordinate
+
+	if l.isReversed {
+		startPoint = l.end
+		endPoint = l.start
+	} else {
+		startPoint = l.start
+		endPoint = l.end
+	}
+	return startPoint, endPoint
+}

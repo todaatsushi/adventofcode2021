@@ -1,6 +1,8 @@
 package models
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestLine(t *testing.T) {
 	t.Run("Test read lines from input", func(t *testing.T) {
