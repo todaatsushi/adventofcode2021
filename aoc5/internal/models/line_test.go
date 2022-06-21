@@ -161,6 +161,89 @@ func TestLine(t *testing.T) {
 		if notStraightLine.isStraight() == true {
 			t.Fatal("Line shouldn't be evaluated as straight")
 		}
+	})
 
+	t.Run("Test get start and end points straight line", func(t *testing.T) {
+		startStraight := &Coordinate{x: 0, y: 0}
+		endStraight := &Coordinate{x: 10, y: 0}
+		line := newLine(startStraight, endStraight)
+
+		start, end := line.getStartAndEndPoints()
+		if start.x != startStraight.x || start.y != startStraight.y {
+			t.Fatalf("Wrong start point returned. Expected: %d,%d - Got: %d, %d", start.x, start.y, startStraight.x, startStraight.y)
+		}
+		if end.x != endStraight.x || end.y != endStraight.y {
+			t.Fatalf("Wrong end point returned. Expected: %d,%d - Got: %d, %d", end.x, end.y, endStraight.x, endStraight.y)
+		}
+	})
+
+	t.Run("Test get start and end points straight reversed line", func(t *testing.T) {
+		startStraight := &Coordinate{x: 0, y: 0}
+		endStraight := &Coordinate{x: 0, y: 10}
+		line := newLine(startStraight, endStraight)
+
+		start, end := line.getStartAndEndPoints()
+		if start.x != startStraight.x || start.y != startStraight.y {
+			t.Fatalf("Wrong start point returned. Expected: %d,%d - Got: %d, %d", start.x, start.y, startStraight.x, startStraight.y)
+		}
+		if end.x != endStraight.x || end.y != endStraight.y {
+			t.Fatalf("Wrong end point returned. Expected: %d,%d - Got: %d, %d", end.x, end.y, endStraight.x, endStraight.y)
+		}
+	})
+
+	t.Run("Test get start and end points diagonal line", func(t *testing.T) {
+		startDiagonal := &Coordinate{x: 0, y: 0}
+		endDiagonal := &Coordinate{x: 10, y: 10}
+		line := newLine(startDiagonal, endDiagonal)
+
+		start, end := line.getStartAndEndPoints()
+		if start.x != startDiagonal.x || start.y != startDiagonal.y {
+			t.Fatalf("Wrong start point returned. Expected: %d,%d - Got: %d, %d", start.x, start.y, startDiagonal.x, startDiagonal.y)
+		}
+		if end.x != endDiagonal.x || end.y != endDiagonal.y {
+			t.Fatalf("Wrong end point returned. Expected: %d,%d - Got: %d, %d", end.x, end.y, endDiagonal.x, endDiagonal.y)
+		}
+	})
+
+	t.Run("Test get start and end points diagonal reversed line", func(t *testing.T) {
+		startDiagonal := &Coordinate{x: 10, y: 0}
+		endDiagonal := &Coordinate{x: 0, y: 10}
+		line := newLine(startDiagonal, endDiagonal)
+
+		start, end := line.getStartAndEndPoints()
+		if start.x != endDiagonal.x || start.y != endDiagonal.y {
+			t.Fatalf("Wrong start point returned. Expected: %d,%d - Got: %d, %d", start.x, start.y, startDiagonal.x, startDiagonal.y)
+		}
+		if end.x != startDiagonal.x || end.y != startDiagonal.y {
+			t.Fatalf("Wrong end point returned. Expected: %d,%d - Got: %d, %d", end.x, end.y, endDiagonal.x, endDiagonal.y)
+		}
+	})
+
+	t.Run("Test get start and end points diagonal line going down", func(t *testing.T) {
+		startDiagonal := &Coordinate{x: 0, y: 10}
+		endDiagonal := &Coordinate{x: 10, y: 0}
+		line := newLine(startDiagonal, endDiagonal)
+
+		start, end := line.getStartAndEndPoints()
+		if start.x != startDiagonal.x || start.y != startDiagonal.y {
+			t.Fatalf("Wrong start point returned. Expected: %d,%d - Got: %d, %d", start.x, start.y, startDiagonal.x, startDiagonal.y)
+		}
+		if end.x != endDiagonal.x || end.y != endDiagonal.y {
+			t.Fatalf("Wrong end point returned. Expected: %d,%d - Got: %d, %d", end.x, end.y, endDiagonal.x, endDiagonal.y)
+		}
+	})
+
+	t.Run("Test get start and end points diagonal reversed line going down", func(t *testing.T) {
+		startDiagonal := &Coordinate{x: 10, y: 0}
+		endDiagonal := &Coordinate{x: 0, y: 10}
+		line := newLine(startDiagonal, endDiagonal)
+
+		start, end := line.getStartAndEndPoints()
+		if start.x != endDiagonal.x || start.y != endDiagonal.y {
+			t.Fatalf("Wrong start point returned. Expected: %d,%d - Got: %d, %d", start.x, start.y, startDiagonal.x, startDiagonal.y)
+		}
+		if end.x != startDiagonal.x || end.y != startDiagonal.y {
+			t.Fatalf("Wrong end point returned. Expected: %d,%d - Got: %d, %d", end.x, end.y, endDiagonal.x, endDiagonal.y)
+		}
 	})
 }
