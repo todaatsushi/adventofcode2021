@@ -95,10 +95,10 @@ func TestLine(t *testing.T) {
 			t.Fatal("Line start coord is not the start coord")
 		}
 
-		if line.isVertical == false {
-			t.Fatal("Line should not be marked as vertical")
+		if line.isVertical == true {
+			t.Fatal("Line should be marked as vertical")
 		}
-		if line.isReversed == true {
+		if line.isReversed == false {
 			t.Fatal("Line should not be marked as reversed")
 		}
 	})
@@ -116,11 +116,11 @@ func TestLine(t *testing.T) {
 			t.Fatal("Line start coord is not the start coord")
 		}
 
-		if line.isVertical == false {
-			t.Fatal("Line should not be marked as vertical")
+		if line.isVertical == true {
+			t.Fatal("Line should be marked as vertical")
 		}
-		if line.isReversed == true {
-			t.Fatal("Line should be marked as reversed")
+		if line.isReversed == false {
+			t.Fatal("Line should not be marked as reversed")
 		}
 	})
 
@@ -268,7 +268,7 @@ func TestLine(t *testing.T) {
 
 		start, end := line.getStartAndEndPoints()
 		if start.x != startDiagonal.x || start.y != startDiagonal.y {
-			t.Fatalf("Wrong start point returned. Expected: %d,%d - Got: %d, %d", start.x, start.y, startDiagonal.x, startDiagonal.y)
+			t.Fatalf("Wrong start point returned. Expected: %d,%d - Got: %d, %d", startDiagonal.x, startDiagonal.y, start.x, start.y)
 		}
 		if end.x != endDiagonal.x || end.y != endDiagonal.y {
 			t.Fatalf("Wrong end point returned. Expected: %d,%d - Got: %d, %d", end.x, end.y, endDiagonal.x, endDiagonal.y)

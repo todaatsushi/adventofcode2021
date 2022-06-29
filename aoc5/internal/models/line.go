@@ -50,15 +50,14 @@ func (l *Line) isStraight() bool {
 }
 
 func (l *Line) getStartAndEndPoints() (*Coordinate, *Coordinate) {
-	var startPoint *Coordinate
-	var endPoint *Coordinate
+	lineIsStraight := l.isStraight()
+	straightAndReversed := lineIsStraight == true && l.isReversed == true
+	diagonalAndEndStartsFirst := lineIsStraight == false && l.start.x > l.end.x
 
-	if l.isReversed {
-		startPoint = l.end
-		endPoint = l.start
-	} else {
-		startPoint = l.start
-		endPoint = l.end
+	flipPoints := straightAndReversed || diagonalAndEndStartsFirst
+
+	if flipPoints == true {
+		return l.end, l.start
 	}
-	return startPoint, endPoint
+	return l.start, l.end
 }
