@@ -61,3 +61,26 @@ func (l *Line) getStartAndEndPoints() (*Coordinate, *Coordinate) {
 	}
 	return l.start, l.end
 }
+
+func (l *Line) getDiagonalPoints() []*Coordinate {
+	start, end := l.getStartAndEndPoints()
+
+	coordinates := make([]*Coordinate, end.x-start.x)
+	coordinates[0] = start
+	coordinates[len(coordinates)-1] = end
+
+	inc := 1
+	if end.y < start.y {
+		inc = -1
+	}
+
+	x := start.x + 1
+	y := start.y + inc
+
+	for i := 1; i < end.x-start.x; i++ {
+		coordinates[i] = &Coordinate{x: x, y: y}
+		x += 1
+		y += inc
+	}
+	return coordinates
+}

@@ -288,4 +288,100 @@ func TestLine(t *testing.T) {
 			t.Fatalf("Wrong end point returned. Expected: %d,%d - Got: %d, %d", end.x, end.y, endDiagonal.x, endDiagonal.y)
 		}
 	})
+
+	t.Run("Test get diagonal straight forward line coordinates", func(t *testing.T) {
+		start := &Coordinate{x: 0, y: 0}
+		end := &Coordinate{x: 3, y: 3}
+
+		line := newLine(start, end)
+		coords := line.getDiagonalPoints()
+
+		startX := 0
+		startY := 0
+
+		for _, c := range coords {
+			if startX != c.x {
+				t.Fatalf("X on coordinates dont match! Got %d expected %d", c.x, startX)
+			}
+
+			if startY != c.y {
+				t.Fatalf("Y on coordinates match! Got %d expected %d", c.y, startY)
+			}
+
+			startX += 1
+			startY += 1
+		}
+	})
+
+	t.Run("Test get reverse diagonal line coordinates", func(t *testing.T) {
+		start := &Coordinate{x: 13, y: 13}
+		end := &Coordinate{x: 10, y: 10}
+
+		line := newLine(start, end)
+		coords := line.getDiagonalPoints()
+
+		startX := 10
+		startY := 10
+
+		for _, c := range coords {
+			if startX != c.x {
+				t.Fatalf("X on coordinates dont match! Got %d expected %d", c.x, startX)
+			}
+
+			if startY != c.y {
+				t.Fatalf("Y on coordinates match! Got %d expected %d", c.y, startY)
+			}
+
+			startX += 1
+			startY += 1
+		}
+	})
+
+	t.Run("Test get diagonal line coordinates going down", func(t *testing.T) {
+		start := &Coordinate{x: 10, y: 13}
+		end := &Coordinate{x: 13, y: 10}
+
+		line := newLine(start, end)
+		coords := line.getDiagonalPoints()
+
+		startX := 10
+		startY := 13
+
+		for _, c := range coords {
+			if startX != c.x {
+				t.Fatalf("X on coordinates dont match! Got %d expected %d", c.x, startX)
+			}
+
+			if startY != c.y {
+				t.Fatalf("Y on coordinates dont match! Got %d expected %d", c.y, startY)
+			}
+
+			startX += 1
+			startY -= 1
+		}
+	})
+
+	t.Run("Test get reverse diagonal line coordinates going down", func(t *testing.T) {
+		start := &Coordinate{x: 8, y: 0}
+		end := &Coordinate{x: 0, y: 8}
+
+		line := newLine(start, end)
+		coords := line.getDiagonalPoints()
+
+		startX := 0
+		startY := 8
+
+		for _, c := range coords {
+			if startX != c.x {
+				t.Fatalf("X on coordinates dont match! Got %d expected %d", c.x, startX)
+			}
+
+			if startY != c.y {
+				t.Fatalf("Y on dont coordinates match! Got %d expected %d", c.y, startY)
+			}
+
+			startX += 1
+			startY -= 1
+		}
+	})
 }
