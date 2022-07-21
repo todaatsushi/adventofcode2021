@@ -49,6 +49,11 @@ func (g *Graph) drawLine(l *Line) {
 				(*g).points[i][l.start.y] += 1
 			}
 		}
+	} else {
+		diagonalCoordinates := l.getDiagonalPoints()
+		for _, c := range diagonalCoordinates {
+			(*g).points[c.x][c.y] += 1
+		}
 	}
 }
 
@@ -90,9 +95,6 @@ func (g *Graph) Describe(showGraph bool) {
 	if showGraph == true {
 		fmt.Println("Graph clean:")
 		g.print(true)
-
-		fmt.Println("Graph raw:")
-		g.print(false)
 	}
 }
 

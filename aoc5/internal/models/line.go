@@ -64,6 +64,7 @@ func (l *Line) getStartAndEndPoints() (*Coordinate, *Coordinate) {
 
 func (l *Line) getDiagonalPoints() []*Coordinate {
 	start, end := l.getStartAndEndPoints()
+	// fmt.Println("\nNew line:")
 
 	coordinates := make([]*Coordinate, end.x-start.x)
 	coordinates[0] = start
@@ -79,6 +80,7 @@ func (l *Line) getDiagonalPoints() []*Coordinate {
 
 	for i := 1; i < end.x-start.x; i++ {
 		coordinates[i] = &Coordinate{x: x, y: y}
+		// fmt.Println(x, y)
 		x += 1
 		y += inc
 	}

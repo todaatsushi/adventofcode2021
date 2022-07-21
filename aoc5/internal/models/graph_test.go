@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -148,7 +147,6 @@ func TestGraphReading(t *testing.T) {
 		for r := 0; r < 10; r++ {
 			for c := 0; c < 10; c++ {
 				if (*graph).points[r][c] != expected[r][c] {
-					fmt.Println("Graph incorrect:")
 					graph.Describe(true)
 					t.Fatalf("Graph val @(%d, %d) different - got %d, expected %d", r, c, (*graph).points[r][c], expected[r][c])
 				}
@@ -156,33 +154,72 @@ func TestGraphReading(t *testing.T) {
 		}
 	})
 
-	t.Run("Test get tallies from graph after read", func(t *testing.T) {
+	t.Run("Test draw multiple lines with diagonals", func(t *testing.T) {
 		input := []string{
-			"0,0 -> 0,9",
-			"9,0 -> 0,0",
+			"0,9 -> 5,9",
+			"8,0 -> 0,8",
+			"9,4 -> 3,4",
+			"2,2 -> 2,1",
+			"7,0 -> 7,4",
+			"6,4 -> 2,0",
+			"0,9 -> 2,9",
+			"3,4 -> 1,4",
+			"0,0 -> 8,8",
+			"5,5 -> 8,2",
 		}
 		lines := ReadLines(input)
 		graph := NewGraph(lines)
 		graph.ReadLines(true)
+		graph.Describe(true)
 
-		pointsOver2 := 1
-		pointsOver1 := 19
-		pointsOver10 := 0
-		vals := []int{2, 1, 10}
-
-		expectedCounts := []int{pointsOver2, pointsOver1, pointsOver10}
-		actualCounts := make([]int, 3)
-
-		var c int
-		for i, v := range vals {
-			c = graph.PointsWithOverXNumberOfLines(v)
-			actualCounts[i] = c
+		expected := [10][10]int{
+			{1, 0, 0, 0, 0, 0, 0, 0, 1, 2},
+			{0, 1, 0, 0, 1, 0, 0, 1, 0, 2},
+			{1, 1, 2, 0, 1, 0, 1, 0, 0, 2},
+			{0, 0, 0, 1, 2, 1, 0, 0, 0, 1},
+			{0, 0, 1, 0, 3, 0, 0, 0, 0, 1},
+			{0, 0, 0, 2, 1, 2, 0, 0, 0, 1},
+			{0, 0, 1, 0, 3, 0, 1, 0, 0, 0},
+			{1, 2, 1, 2, 2, 0, 0, 1, 0, 0},
+			{1, 0, 1, 0, 1, 0, 0, 0, 1, 0},
+			{0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
 		}
-
-		for i, ans := range actualCounts {
-			if ans != expectedCounts[i] {
-				t.Fatalf("Tally for val %d incorrect - expected %d, got %d", vals[i], expectedCounts[i], ans)
+		for r := 0; r < 10; r++ {
+			for c := 0; c < 10; c++ {
+				if (*graph).points[r][c] != expected[r][c] {
+					t.Fatalf("Graph val @(%d, %d) different - got %d, expected %d", r, c, (*graph).points[r][c], expected[r][c])
+				}
 			}
 		}
 	})
+
+	// t.Run("Test get tallies from graph after read", func(t *testing.T) {
+	// 	input := []string{
+	// 		"0,0 -> 0,9",
+	// 		"9,0 -> 0,0",
+	// 	}
+	// 	lines := ReadLines(input)
+	// 	graph := NewGraph(lines)
+	// 	graph.ReadLines(true)
+
+	// 	pointsOver2 := 1
+	// 	pointsOver1 := 19
+	// 	pointsOver10 := 0
+	// 	vals := []int{2, 1, 10}
+
+	// 	expectedCounts := []int{pointsOver2, pointsOver1, pointsOver10}
+	// 	actualCounts := make([]int, 3)
+
+	// 	var c int
+	// 	for i, v := range vals {
+	// 		c = graph.PointsWithOverXNumberOfLines(v)
+	// 		actualCounts[i] = c
+	// 	}
+
+	// 	for i, ans := range actualCounts {
+	// 		if ans != expectedCounts[i] {
+	// 			t.Fatalf("Tally for val %d incorrect - expected %d, got %d", vals[i], expectedCounts[i], ans)
+	// 		}
+	// 	}
+	// })
 }
