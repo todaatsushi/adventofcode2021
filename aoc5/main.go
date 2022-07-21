@@ -1,7 +1,7 @@
 package main
 
-import "adventofcode2021/aoc5/cmd"
+import "fmt"
 
 func main() {
-	cmd.Execute()
+	fmt.Print("Hello")
 }
