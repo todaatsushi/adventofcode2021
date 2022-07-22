@@ -62,9 +62,33 @@ func (l *Line) getStraightStartAndEnd(axis string) (int, int) {
 	}
 }
 
+func (l *Line) getDiagonalStartAndEnd(axis string) (int, int) {
+	var start, end int
+
+	if axis == "x" {
+		if l.StartX < l.EndX {
+			start = l.StartX
+			end = l.EndX
+		} else {
+			start = l.EndX
+			end = l.StartX
+		}
+	} else {
+		if l.StartX < l.EndX {
+			start = l.StartY
+			end = l.EndY
+		} else {
+			start = l.EndY
+			end = l.StartY
+		}
+	}
+	return start, end
+}
+
 func (l *Line) GetStartAndEnd(axis string) (int, int) {
 	if l.IsStraight() == true {
 		return l.getStraightStartAndEnd(axis)
+	} else {
+		return l.getDiagonalStartAndEnd(axis)
 	}
-	return -1, -1
 }

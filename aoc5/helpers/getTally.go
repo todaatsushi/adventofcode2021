@@ -21,6 +21,33 @@ func tallyStraightLine(line *Line, tally *int, graph *Graph) {
 	}
 }
 
+func tallyDiagonalLine(line *Line, tally *int, graph *Graph) {
+	startX, endX := line.GetStartAndEnd("x")
+	startY, endY := line.GetStartAndEnd("y")
+	var movement int
+
+	if endY < startY {
+		movement = -1
+	} else {
+		movement = 1
+	}
+
+	x, y := startX, startY
+
+	for {
+		if x == endX+1 && y == endY+movement {
+			break
+		}
+		graph.Points[x][y]++
+		if graph.Points[x][y] == 2 {
+			*tally++
+		}
+
+		x++
+		y += movement
+	}
+}
+
 func GetTally(lines []Line) int {
 	tally := 0
 	graph := *NewGraph(lines)
@@ -28,6 +55,8 @@ func GetTally(lines []Line) int {
 	for _, l := range lines {
 		if l.IsStraight() == true {
 			tallyStraightLine(&l, &tally, &graph)
+		} else {
+			tallyDiagonalLine(&l, &tally, &graph)
 		}
 	}
 	return tally
