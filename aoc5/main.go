@@ -117,7 +117,41 @@ func main() {
 	filename := os.Args[1]
 
 	input := readInput(filename)
-	for _, l := range input {
-		fmt.Println(newLine(l))
+	numLines := len(input)
+
+	lines := make([]Line, numLines)
+	for i, l := range input {
+		lines[i] = newLine(l)
 	}
+
+	graph := *NewGraph(lines)
+	tally := 0
+
+	var start int
+	var end int
+	for _, l := range lines {
+		if l.isStraight() == true {
+			if l.startX == l.endX {
+				start, end = l.getStartAndEnd("y")
+				for i := start; i <= end; i++ {
+					graph.points[l.startX][i]++
+					if graph.points[l.startX][i] == 2 {
+						tally++
+					}
+				}
+			} else {
+				start, end = l.getStartAndEnd("x")
+				for i := start; i <= end; i++ {
+					graph.points[i][l.startY]++
+					if graph.points[i][l.startY] == 2 {
+						tally++
+					}
+				}
+			}
+		}
+	}
+
+	graph.print(true)
+	fmt.Println()
+	fmt.Println(tally)
 }
