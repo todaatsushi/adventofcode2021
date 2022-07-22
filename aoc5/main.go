@@ -63,6 +63,10 @@ type Line struct {
 	endY   int
 }
 
+func (l *Line) isStraight() bool {
+	return l.startX == l.endX || l.startY == l.endY
+}
+
 func getXAndY(lineStr string) (int, int) {
 	coords := strings.Split(lineStr, ",")
 
@@ -72,6 +76,22 @@ func getXAndY(lineStr string) (int, int) {
 	intY, _ := strconv.Atoi(strY)
 
 	return intX, intY
+}
+
+func (l *Line) getStartAndEnd(axis string) (int, int) {
+	if axis == "x" {
+		if l.startX > l.endX {
+			return l.endX, l.startX
+		} else {
+			return l.startX, l.endX
+		}
+	} else {
+		if l.startY > l.endY {
+			return l.endY, l.startY
+		} else {
+			return l.startY, l.endY
+		}
+	}
 }
 
 func newLine(inputs string) Line {
