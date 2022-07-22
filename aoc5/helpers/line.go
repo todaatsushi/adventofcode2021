@@ -12,10 +12,7 @@ type Line struct {
 	EndY   int
 }
 
-func (l *Line) IsStraight() bool {
-	return l.StartX == l.EndX || l.StartY == l.EndY
-}
-
+// Reading in lines
 func getXAndY(lineStr string) (int, int) {
 	coords := strings.Split(lineStr, ",")
 
@@ -25,22 +22,6 @@ func getXAndY(lineStr string) (int, int) {
 	intY, _ := strconv.Atoi(strY)
 
 	return intX, intY
-}
-
-func (l *Line) GetStartAndEnd(axis string) (int, int) {
-	if axis == "x" {
-		if l.StartX > l.EndX {
-			return l.EndX, l.StartX
-		} else {
-			return l.StartX, l.EndX
-		}
-	} else {
-		if l.StartY > l.EndY {
-			return l.EndY, l.StartY
-		} else {
-			return l.StartY, l.EndY
-		}
-	}
 }
 
 func newLine(inputs string) Line {
@@ -58,4 +39,32 @@ func ReadLines(rawLines []string) []Line {
 		lines[i] = newLine(l)
 	}
 	return lines
+}
+
+// Drawing lines
+func (l *Line) IsStraight() bool {
+	return l.StartX == l.EndX || l.StartY == l.EndY
+}
+
+func (l *Line) getStraightStartAndEnd(axis string) (int, int) {
+	if axis == "x" {
+		if l.StartX > l.EndX {
+			return l.EndX, l.StartX
+		} else {
+			return l.StartX, l.EndX
+		}
+	} else {
+		if l.StartY > l.EndY {
+			return l.EndY, l.StartY
+		} else {
+			return l.StartY, l.EndY
+		}
+	}
+}
+
+func (l *Line) GetStartAndEnd(axis string) (int, int) {
+	if l.IsStraight() == true {
+		return l.getStraightStartAndEnd(axis)
+	}
+	return -1, -1
 }
