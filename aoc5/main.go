@@ -8,6 +8,54 @@ import (
 	"strings"
 )
 
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+type Graph struct {
+	points [][]int
+}
+
+func (g *Graph) print(pretty bool) {
+	for r := 0; r < len((*g).points); r++ {
+		for c := 0; c < len((*g).points[r]); c++ {
+			if pretty == true {
+				fmt.Printf("%d ", (*g).points[c][r])
+			} else {
+				fmt.Printf("%d ", (*g).points[r][c])
+			}
+		}
+		fmt.Print("\n")
+	}
+}
+
+func NewGraph(lines []Line) *Graph {
+	x := 0
+	y := 0
+	tempX := 0
+	tempY := 0
+
+	for _, l := range lines {
+		tempX = max(l.startX, l.endX)
+		tempY = max(l.startY, l.endY)
+
+		x = max(x, tempX)
+		y = max(y, tempY)
+	}
+	x++
+	y++
+
+	points := make([][]int, x)
+	for i := 0; i < x; i++ {
+		points[i] = make([]int, y)
+	}
+	graph := Graph{points: points}
+	return &graph
+}
+
 type Line struct {
 	startX int
 	startY int
