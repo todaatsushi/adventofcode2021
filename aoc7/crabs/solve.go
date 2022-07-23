@@ -9,6 +9,10 @@ func absDiffInt(x, y int) int {
 	return y - x
 }
 
+func getFuelCost(point int, location int) int {
+	return absDiffInt(point, location)
+}
+
 func FindOptimalConversionPoint(locationMap *map[int]int, start int, end int) int {
 	smallestMoves := math.MaxInt
 
@@ -18,7 +22,7 @@ func FindOptimalConversionPoint(locationMap *map[int]int, start int, end int) in
 			if location == point {
 				continue
 			}
-			distance := absDiffInt(point, location)
+			distance := getFuelCost(point, location)
 			total += distance * crabCount
 		}
 
