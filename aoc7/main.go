@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"sort"
 	"strconv"
@@ -72,5 +73,6 @@ func main() {
 	crabs := parseCrabsFromFile(filename)
 	locationMap := createLocationMap(crabs)
 
-	fmt.Println(locationMap)
+	bestPlacement := findOptimalConversionPoint(&locationMap, crabs[0], crabs[len(crabs)-1])
+	fmt.Println("Min moves:", bestPlacement)
 }
