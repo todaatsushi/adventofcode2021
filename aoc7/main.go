@@ -31,9 +31,19 @@ func parseCrabsFromFile(filename string) []int {
 	return crabs
 }
 
+func createLocationMap(crabs []int) map[int]int {
+	lm := make(map[int]int)
+	for _, c := range crabs {
+		lm[c]++
+	}
+	return lm
+
+}
+
 func main() {
 	filename := os.Args[1]
 	crabs := parseCrabsFromFile(filename)
+	locationMap := createLocationMap(crabs)
 
-	fmt.Println(crabs)
+	fmt.Println(locationMap)
 }
