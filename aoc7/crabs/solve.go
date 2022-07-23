@@ -10,7 +10,13 @@ func absDiffInt(x, y int) int {
 }
 
 func getFuelCost(point int, location int) int {
-	return absDiffInt(point, location)
+	distance := absDiffInt(point, location)
+	triangleTotal := 0
+
+	for i := 0; i < distance+1; i++ {
+		triangleTotal += i
+	}
+	return triangleTotal
 }
 
 func FindOptimalConversionPoint(locationMap *map[int]int, start int, end int) int {
