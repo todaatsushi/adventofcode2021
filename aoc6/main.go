@@ -2,7 +2,6 @@ package main
 
 import (
 	"adventofcode2021/aoc6/src"
-	"fmt"
 	"os"
 	"strconv"
 )
@@ -12,9 +11,6 @@ func main() {
 	daysStr := os.Args[2]
 	days, _ := strconv.Atoi(daysStr)
 
-	fishAges := src.GetFishAgesFromInput(filename)
-	fish := src.FishFromAges(fishAges)
-
-	total := src.GetNumFishAfterDays(fish, days)
-	fmt.Println("Num of fish:", total)
+	timeline := src.SpawnFishFromInput(filename)
+	src.SimulateFishGrowth(timeline, days)
 }
