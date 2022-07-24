@@ -36,8 +36,32 @@ func readInput(filename string) [][]string {
 	return entries
 }
 
+func getCharCountMap() map[int]int {
+	charCounts := map[int]int{
+		2: 1,
+		4: 4,
+		3: 7,
+		7: 8,
+	}
+	return charCounts
+}
+
 func main() {
 	filename := os.Args[1]
-	output := readInput(filename)
-	fmt.Println(output)
+	outputs := readInput(filename)
+	charCounts := getCharCountMap()
+	tally := map[int]int{1: 0, 4: 0, 7: 0, 8: 0}
+
+	for _, outputSet := range outputs {
+		for _, output := range outputSet {
+			if num, ok := charCounts[len(output)]; ok {
+				tally[num]++
+			}
+		}
+	}
+	total := 0
+	for _, count := range tally {
+		total += count
+	}
+	fmt.Println(total)
 }
