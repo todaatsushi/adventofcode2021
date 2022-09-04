@@ -17,9 +17,12 @@ func getCharCountMap() map[int]int {
 func Solve(filename string) int {
 	outputs := utils.ReadInput(filename)
 	charCounts := getCharCountMap()
+
 	tally := map[int]int{1: 0, 4: 0, 7: 0, 8: 0}
 
-	for _, outputSet := range outputs {
+	var outputSet []string
+	for _, io := range outputs {
+		outputSet = io[1]
 		for _, output := range outputSet {
 			if num, ok := charCounts[len(output)]; ok {
 				tally[num]++
