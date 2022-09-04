@@ -5,18 +5,22 @@ import (
 	"strings"
 )
 
-func readEntry(entry string) []string {
-	splitContent := strings.Split(entry, "|")
+func parse(content string, size int) []string {
+	content = strings.TrimSpace(content)
+	splitRawOutput := strings.Split(content, " ")
 
-	rawOutput := strings.TrimSpace(splitContent[1])
-	splitRawOutput := strings.Split(rawOutput, " ")
-
-	output := make([]string, 4)
+	output := make([]string, size)
 	for i, o := range splitRawOutput {
 		output[i] = strings.TrimSpace(o)
 	}
 	return output
+}
 
+func readEntry(entry string) []string {
+	splitContent := strings.Split(entry, "|")
+
+	output := parse(splitContent[1], 4)
+	return output
 }
 
 func ReadInput(filename string) [][]string {
