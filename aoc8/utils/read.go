@@ -16,11 +16,15 @@ func parse(content string, size int) []string {
 	return output
 }
 
-func readEntry(entry string) []string {
+func readEntry(entry string) ([]string, []string) {
 	splitContent := strings.Split(entry, "|")
 
+	// Input section
+	input := parse(splitContent[0], 10)
+
+	// Output section
 	output := parse(splitContent[1], 4)
-	return output
+	return input, output
 }
 
 func ReadInput(filename string) [][]string {
@@ -34,7 +38,7 @@ func ReadInput(filename string) [][]string {
 
 	for i, e := range rawEntries {
 		e = strings.TrimSpace(e)
-		entries[i] = readEntry(e)
+		_, entries[i] = readEntry(e)
 	}
 	return entries
 }
