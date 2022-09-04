@@ -27,18 +27,23 @@ func readEntry(entry string) ([]string, []string) {
 	return input, output
 }
 
-func ReadInput(filename string) [][]string {
+func ReadInput(filename string) [][2][]string {
 	content, _ := os.ReadFile(filename)
 
 	strContent := string(content)
 	strContent = strings.TrimSpace(strContent)
 
 	rawEntries := strings.Split(strContent, "\n")
-	entries := make([][]string, len(rawEntries))
+	entries := make([][2][]string, len(rawEntries))
 
+	var input []string
+	var output []string
 	for i, e := range rawEntries {
 		e = strings.TrimSpace(e)
-		_, entries[i] = readEntry(e)
+		input, output = readEntry(e)
+
+		entries[i][0] = input
+		entries[i][1] = output
 	}
 	return entries
 }
