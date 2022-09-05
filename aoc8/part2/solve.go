@@ -95,7 +95,6 @@ func Solve(filename string) int {
 		charMap := generateCharMap(input)
 
 		val = createOutputVal(&charMap, output)
-		fmt.Println(val)
 		total += val
 	}
 
