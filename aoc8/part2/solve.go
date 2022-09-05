@@ -1,6 +1,11 @@
 package part2
 
 import (
+	"fmt"
+	"log"
+	"sort"
+	"strconv"
+
 	"adventofcode2021/aoc8/utils"
 )
 
@@ -58,4 +63,41 @@ func generateCharMap(input []string) map[string]int {
 	}
 
 	return charMap.Table
+}
+
+func createOutputVal(charMap *map[string]int, output []string) int {
+	var number string
+	for _, pattern := range output {
+		pattern = utils.SortString(pattern)
+		number = fmt.Sprintf("%v%v", number, (*charMap)[pattern])
+	}
+
+	val, err := strconv.Atoi(number)
+	if err != nil {
+		log.Fatal("Couldn't convert:", number)
+	}
+	return val
+}
+
+func Solve(filename string) int {
+	content := utils.ReadInput(filename)
+
+	var input []string
+	var output []string
+
+	var val int
+	total := 0
+	for _, line := range content {
+		input = line[0]
+		output = line[1]
+
+		sort.Sort(utils.ByLength(input))
+		charMap := generateCharMap(input)
+
+		val = createOutputVal(&charMap, output)
+		fmt.Println(val)
+		total += val
+	}
+
+	return total
 }
