@@ -42,7 +42,7 @@ fn should_add_point(x: i32, y: i32, grid: &Vec<Vec<i32>>, moves: &[[i32; 2]; 4])
 }
 
 fn main() {
-    let grid = parse_input(true);
+    let grid = parse_input(false);
     let rows = grid.len() as i32;
     let cols = grid[0].len() as i32;
     let mut risk_score = 0;
