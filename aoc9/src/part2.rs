@@ -42,6 +42,30 @@ fn build_basin(
 
 pub fn solve_part_2(is_test: bool) {
     let grid = parse_input(is_test);
+    let rows = grid.len() as i32;
+    let cols = grid[0].len() as i32;
 
-    println!("{:?}", grid);
+    let mut visited_points: HashSet<[i32; 2]> = HashSet::new();
+    let mut sub_total: i32;
+    let mut totals: Vec<i32> = Vec::new();
+
+    for row in 0..rows {
+        for col in 0..cols {
+            sub_total = build_basin(row, col, &mut visited_points, &grid);
+            if sub_total > 0 {
+                totals.push(sub_total);
+            }
+        }
+    }
+    totals.sort();
+    totals.reverse();
+
+    let mut total = 1;
+
+    // No guarantee of 3 elems usually, but the AOC spec says all non 9 squares are in a basin,
+    // so make this unreasonable assumption.
+    for i in 0..3 {
+        total *= totals[i];
+    }
+    println!("Part 2 answer: {} (Test: {})", total, is_test);
 }
