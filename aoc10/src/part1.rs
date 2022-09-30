@@ -1,9 +1,19 @@
 use crate::utils;
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
+
+fn build_score_mapper() -> HashMap<&'static str, i32> {
+    let mut map = HashMap::new();
+
+    map.insert(")", 3);
+    map.insert("]", 57);
+    map.insert("}", 1197);
+    map.insert(">", 25137);
+    map
+}
 
 pub fn solve_part_1(input: Vec<Vec<&'static str>>) {
     let closing_mapper = utils::build_closing_bracket_mapper();
-    let score_mapper = utils::build_score_mapper();
+    let score_mapper = build_score_mapper();
     let opening_brackets = HashSet::from(["{", "(", "<", "["]);
 
     let mut expected: &str;
