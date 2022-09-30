@@ -46,11 +46,13 @@ fn main() {
                     None => panic!("bracket_stack empty"),
                 };
                 if expected != bracket {
+                    // Maintain the character if it has already been set, otherwise set
                     first_illegal_character = match first_illegal_character {
                         Some(value) => Some(value),
                         None => Some(bracket),
                     };
 
+                    // Only accrue score if it matches the first illegal char
                     if first_illegal_character.unwrap() == bracket {
                         subtotal += score_mapper.get(bracket).unwrap()
                     }
