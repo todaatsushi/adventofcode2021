@@ -1,5 +1,15 @@
 use crate::utils;
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
+
+fn build_score_mapper() -> HashMap<&'static str, u128> {
+    let mut map = HashMap::new();
+
+    map.insert(")", 1);
+    map.insert("]", 2);
+    map.insert("}", 3);
+    map.insert(">", 4);
+    map
+}
 
 pub fn solve_part_2(input: &Vec<Vec<&'static str>>) {
     let closing_mapper = utils::build_closing_bracket_mapper();
