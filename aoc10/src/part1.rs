@@ -11,7 +11,7 @@ fn build_score_mapper() -> HashMap<&'static str, i32> {
     map
 }
 
-pub fn solve_part_1(input: Vec<Vec<&'static str>>) {
+pub fn solve_part_1(input: &Vec<Vec<&'static str>>) {
     let closing_mapper = utils::build_closing_bracket_mapper();
     let score_mapper = build_score_mapper();
     let opening_brackets = HashSet::from(["{", "(", "<", "["]);
@@ -32,7 +32,7 @@ pub fn solve_part_1(input: Vec<Vec<&'static str>>) {
                     Some(b) => b,
                     None => panic!("bracket_stack empty"),
                 };
-                if expected != bracket {
+                if expected != *bracket {
                     // Maintain the character if it has already been set, otherwise set
                     first_illegal_character = match first_illegal_character {
                         Some(value) => Some(value),
@@ -40,7 +40,7 @@ pub fn solve_part_1(input: Vec<Vec<&'static str>>) {
                     };
 
                     // Only accrue score if it matches the first illegal char
-                    if first_illegal_character.unwrap() == bracket {
+                    if first_illegal_character.unwrap() == *bracket {
                         subtotal += score_mapper.get(bracket).unwrap()
                     }
                 }
