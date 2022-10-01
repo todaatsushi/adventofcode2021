@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"adventofcode2021/aoc11/src/utils"
+	"fmt"
+)
 
 func main() {
-	fmt.Println("Hello, world!")
+	filepath := "inputs/test.txt"
+	grid := utils.GetGridFromFile(filepath)
+
+	fmt.Println(grid)
 }
