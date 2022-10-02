@@ -8,7 +8,7 @@ import (
 )
 
 func newGrid(board [10][10]int) Grid {
-	grid := Grid{Board: board, Flashes: 0, coordinateModifiers: utils.GetMoves()}
+	grid := Grid{Board: board, Flashes: 0, Steps: 0, coordinateModifiers: utils.GetMoves()}
 	return grid
 }
 

@@ -8,6 +8,7 @@ import (
 type Grid struct {
 	Board               [10][10]int
 	Flashes             int
+	Steps               int
 	coordinateModifiers [8][2]int
 }
 
@@ -31,6 +32,8 @@ func (g *Grid) validCoordinates(row, col int) bool {
 }
 
 func (g *Grid) step() int {
+	g.Steps += 1
+
 	flashes := 0
 	toVisit := utils.NewQueue()
 	flashed := make(map[[2]int]bool)
