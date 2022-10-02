@@ -30,7 +30,7 @@ func (g *Grid) validCoordinates(row, col int) bool {
 	return row < len(g.Board) && col < len(g.Board[0]) && row >= 0 && col >= 0
 }
 
-func (g *Grid) Step() int {
+func (g *Grid) step() int {
 	flashes := 0
 	toVisit := utils.NewQueue()
 	flashed := make(map[[2]int]bool)
@@ -64,7 +64,16 @@ func (g *Grid) Step() int {
 	return flashes
 }
 
-func (g *Grid) Display() {
+func (g *Grid) FlashXSteps(numSteps int, display bool) {
+	for step := 0; step < numSteps; step++ {
+		g.step()
+	}
+	if display == true {
+		g.display()
+	}
+}
+
+func (g *Grid) display() {
 	for _, r := range g.Board {
 		for _, c := range r {
 			fmt.Print(c)
