@@ -1,3 +1,7 @@
+use aoc12::utils;
+
 fn main() {
-    println!("Hello, world!");
+    let caves = utils::parse_input();
+
+    println!("{:?}", caves);
 }
