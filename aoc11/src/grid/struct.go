@@ -55,6 +55,10 @@ func (g *Grid) step() int {
 			for _, move := range g.getMoves(newCoords) {
 				toVisit.Add([2]int{move[0], move[1]})
 			}
+
+			if len(flashed) == len(g.Board)*len(g.Board[0]) {
+				fmt.Println("All octopuses flashed! Step number: ", g.Steps)
+			}
 		} else {
 			if _, ok := flashed[newCoords]; ok {
 				// Max one flash a turn
