@@ -1,6 +1,6 @@
 use std::collections::{HashMap, HashSet, VecDeque};
 
-pub fn get_num_paths(caves: HashMap<&str, Vec<&str>>, allow_doubles: bool) -> u32 {
+pub fn get_num_paths(caves: &HashMap<&str, Vec<&str>>, allow_doubles: bool) -> u32 {
     let mut num_paths: u32 = 0;
     let mut queue: VecDeque<(&str, HashSet<&str>, bool)> = VecDeque::new();
 
