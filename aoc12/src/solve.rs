@@ -1,6 +1,6 @@
 use std::collections::{HashMap, HashSet, VecDeque};
 
-pub fn get_num_paths(caves: HashMap<&str, Vec<&str>>) -> u32 {
+pub fn get_num_paths(caves: HashMap<&str, Vec<&str>>, allow_doubles: bool) -> u32 {
     let mut num_paths: u32 = 0;
     let mut queue: VecDeque<(&str, HashSet<&str>, bool)> = VecDeque::new();
 
@@ -17,6 +17,7 @@ pub fn get_num_paths(caves: HashMap<&str, Vec<&str>>) -> u32 {
 
         let next_caves = caves.get(&current.clone()).unwrap();
         for cave in next_caves {
+            let is_start_or_end = &"start" == cave || &"end" == cave;
             let seen_cave = seen.contains(cave);
             let mut now_seen = seen.clone();
 
@@ -25,6 +26,8 @@ pub fn get_num_paths(caves: HashMap<&str, Vec<&str>>) -> u32 {
                     now_seen.insert(cave);
                 }
                 queue.push_front((cave, now_seen, visited));
+            } else if seen_cave && visited == false && is_start_or_end == false && allow_doubles {
+                queue.push_front((cave, now_seen, true));
             }
         }
     }
