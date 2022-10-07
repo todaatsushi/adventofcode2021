@@ -61,7 +61,7 @@ pub struct Map {
 }
 
 impl Map {
-    pub fn new(points: Vec<Point>) -> Self {
+    fn get_board_size(points: &Vec<Point>) -> (u32, u32) {
         let mut dimensions = points.iter().fold((0, 0), |mut dimensions, point| {
             if point.y > dimensions.0 {
                 dimensions.0 = point.y;
@@ -74,16 +74,25 @@ impl Map {
         });
         dimensions.0 += 1;
         dimensions.1 += 1;
+        dimensions
+    }
 
+    fn create_empty_board(x: u32, y: u32) -> Vec<Vec<u32>> {
         let mut board: Vec<Vec<u32>> = Vec::new();
 
-        for _ in 0..dimensions.0 {
+        for _ in 0..x {
             let mut row: Vec<u32> = Vec::new();
-            for _ in 0..dimensions.1 {
+            for _ in 0..y {
                 row.push(0);
             }
             board.push(row);
         }
+        board
+    }
+
+    pub fn new(points: Vec<Point>) -> Self {
+        let dimensions = Self::get_board_size(&points);
+        let mut board = Self::create_empty_board(dimensions.0, dimensions.1);
 
         for point in points {
             board[point.y as usize][point.x as usize] += 1
