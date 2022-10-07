@@ -1,3 +1,7 @@
+use aoc13::parse;
+
 fn main() {
-    println!("Hello, world!");
+    let (points, folds) = parse::read_input();
+    println!("Points: {:?}", points);
+    println!("Folds: {:?}", folds);
 }
