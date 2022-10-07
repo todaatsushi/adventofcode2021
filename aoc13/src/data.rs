@@ -27,8 +27,30 @@ impl FromStr for Fold {
         };
 
         Ok(Fold {
-            axis: axis,
+            axis,
             point: fold[1].parse::<u32>().unwrap(),
+        })
+    }
+}
+
+#[derive(Debug)]
+pub struct Point {
+    x: u32,
+    y: u32,
+}
+
+impl FromStr for Point {
+    type Err = ParseError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let points = s
+            .trim()
+            .split(",")
+            .map(|p| p.parse::<u32>().unwrap())
+            .collect::<Vec<u32>>();
+        Ok(Point {
+            x: points[0],
+            y: points[1],
         })
     }
 }
