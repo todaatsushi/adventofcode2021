@@ -54,3 +54,50 @@ impl FromStr for Point {
         })
     }
 }
+
+#[derive(Debug)]
+pub struct Map {
+    board: Vec<Vec<u32>>,
+}
+
+impl Map {
+    pub fn new(points: Vec<Point>) -> Self {
+        let mut dimensions = points.iter().fold((0, 0), |mut dimensions, point| {
+            if point.y > dimensions.0 {
+                dimensions.0 = point.y;
+            }
+
+            if point.x > dimensions.1 {
+                dimensions.1 = point.x;
+            }
+            dimensions
+        });
+        dimensions.0 += 1;
+        dimensions.1 += 1;
+
+        let mut board: Vec<Vec<u32>> = Vec::new();
+
+        for _ in 0..dimensions.0 {
+            let mut row: Vec<u32> = Vec::new();
+            for _ in 0..dimensions.1 {
+                row.push(0);
+            }
+            board.push(row);
+        }
+
+        for point in points {
+            board[point.y as usize][point.x as usize] += 1
+        }
+
+        Map { board }
+    }
+
+    pub fn display(self: Self) {
+        for row in self.board {
+            for col in row {
+                print!("{} ", col);
+            }
+            println!()
+        }
+    }
+}
