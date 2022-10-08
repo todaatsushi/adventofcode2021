@@ -1,4 +1,4 @@
-use crate::data::{Polymer, Rule};
+use crate::data::{rules_to_hashmap, Polymer, Rule};
 use std::env;
 
 #[derive(Debug)]
@@ -29,6 +29,7 @@ pub fn read_input() -> Polymer {
         .map(str::parse)
         .map(Result::unwrap)
         .collect();
+    let rules = rules_to_hashmap(rules);
 
     let sequence = sequence.to_string();
 

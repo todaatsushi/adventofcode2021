@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::str::FromStr;
 use std::string::ParseError;
 
@@ -19,10 +20,19 @@ impl FromStr for Rule {
     }
 }
 
+pub fn rules_to_hashmap(rules: Vec<Rule>) -> HashMap<String, char> {
+    let mut rule_map: HashMap<String, char> = HashMap::new();
+
+    for rule in rules {
+        rule_map.entry(rule.pattern).or_insert(rule.insert);
+    }
+    rule_map
+}
+
 #[derive(Debug)]
 pub struct Polymer {
     pub sequence: String,
-    pub rules: Vec<Rule>,
+    pub rules: HashMap<String, char>,
 }
 
 impl Polymer {
