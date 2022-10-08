@@ -10,7 +10,7 @@ enum InputError {
 fn read_file() -> &'static str {
     let args: Vec<String> = env::args().collect();
     let content = match args.len() as u8 {
-        2 => match args[1].as_str() {
+        3 => match args[1].as_str() {
             "test" => Ok(include_str!("../inputs/test.txt")),
             "puzzle" => Ok(include_str!("../inputs/puzzle.txt")),
             _ => Err(InputError::FileDoesntExist),
