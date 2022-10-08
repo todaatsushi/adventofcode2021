@@ -109,12 +109,27 @@ impl Map {
         Map { board }
     }
 
-    pub fn display(self: &Self) {
-        for row in &self.board {
-            for col in row {
-                print!("{} ", col);
+    pub fn display(self: &Self, show_board: bool, show_visible_points: bool) {
+        if show_board {
+            for row in &self.board {
+                for col in row {
+                    print!("{} ", col);
+                }
+                println!()
             }
-            println!()
+        }
+
+        if show_visible_points {
+            let mut total_visible_points = 0;
+            for row in &self.board {
+                for point in row {
+                    if *point == 1 {
+                        total_visible_points += 1;
+                    }
+                }
+            }
+
+            println!("Total visible points: {}", total_visible_points);
         }
     }
 
