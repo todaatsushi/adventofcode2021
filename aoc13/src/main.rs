@@ -5,6 +5,8 @@ fn main() {
     let (points, folds) = parse::read_input();
     let mut map = Map::new(points);
 
-    map.fold(&folds[0]);
-    map.display(true, true);
+    for fold in folds {
+        map.fold(&fold);
+    }
+    map.display(true, false);
 }
