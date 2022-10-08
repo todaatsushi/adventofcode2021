@@ -10,7 +10,7 @@ enum Axis {
 #[derive(Debug)]
 pub struct Fold {
     axis: Axis,
-    point: u32,
+    point: usize,
 }
 
 impl FromStr for Fold {
@@ -28,7 +28,7 @@ impl FromStr for Fold {
 
         Ok(Fold {
             axis,
-            point: fold[1].parse::<u32>().unwrap(),
+            point: fold[1].parse::<usize>().unwrap(),
         })
     }
 }
@@ -88,6 +88,14 @@ impl Map {
             board.push(row);
         }
         board
+    }
+
+    fn get_num_rows(self: &Self) -> usize {
+        self.board.len()
+    }
+
+    fn get_num_cols(self: &Self) -> usize {
+        self.board[0].len()
     }
 
     pub fn new(points: Vec<Point>) -> Self {
