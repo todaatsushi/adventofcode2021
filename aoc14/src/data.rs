@@ -4,7 +4,7 @@ use std::string::ParseError;
 #[derive(Debug)]
 pub struct Rule {
     pattern: String,
-    insert: String,
+    insert: char,
 }
 
 impl FromStr for Rule {
@@ -14,7 +14,7 @@ impl FromStr for Rule {
         let (pattern, insert) = s.trim().split_once(" -> ").unwrap();
         Ok(Rule {
             pattern: pattern.to_string(),
-            insert: insert.to_string(),
+            insert: insert.chars().next().unwrap(),
         })
     }
 }
