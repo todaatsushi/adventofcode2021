@@ -109,8 +109,8 @@ impl Map {
         Map { board }
     }
 
-    pub fn display(self: Self) {
-        for row in self.board {
+    pub fn display(self: &Self) {
+        for row in &self.board {
             for col in row {
                 print!("{} ", col);
             }
