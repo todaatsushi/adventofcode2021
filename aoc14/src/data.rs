@@ -42,13 +42,17 @@ impl Polymer {
         while right <= self.sequence.len() && left < right {
             let subpattern = self.sequence[left..right].to_string();
 
-            for rule in &self.rules {
-                if subpattern == rule.pattern {
-                    self.sequence.insert(left + 1 as usize, rule.insert);
+            match self.rules.get(&subpattern) {
+                Some(c) => {
+                    self.sequence.insert(left + 1 as usize, *c);
                     left += 2;
                     right = left + 2;
                 }
-            }
+                None => {
+                    left += 1;
+                    right += 1;
+                }
+            };
         }
     }
 
