@@ -139,16 +139,16 @@ impl Map {
 
         match fold.axis {
             Axis::Horizontal => {
-                let start = self.get_num_rows() - to_fold.len();
+                let start_point = self.get_num_rows() - to_fold.len();
                 for to_fold_index in 0..to_fold.len() {
-                    let fold_into_index = start + to_fold_index;
+                    let fold_into_index = start_point + to_fold_index;
 
                     let fold_into = &mut self.board[fold_into_index];
                     let to_fold = &to_fold[to_fold_index];
 
                     for index in 0..fold_into.len() {
                         if fold_into[index] == 1 || to_fold[index] == 1 {
-                            fold_into[index] = 1
+                            fold_into[index] = 1;
                         }
                     }
                 }
