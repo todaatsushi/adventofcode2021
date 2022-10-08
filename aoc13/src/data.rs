@@ -117,4 +117,42 @@ impl Map {
             println!()
         }
     }
+
+    fn split_along(self: &Self, fold: &Fold) -> (Vec<Vec<u32>>, Vec<Vec<u32>>) {
+        match fold.axis {
+            Axis::Horizontal => {
+                let fold_into: Vec<Vec<u32>> = self.board[0..fold.point].into();
+                let mut to_fold: Vec<Vec<u32>> =
+                    self.board[fold.point as usize + 1..self.get_num_rows()].into();
+                to_fold.reverse();
+
+                (fold_into, to_fold)
+            }
+            Axis::Vertical => panic!("Not implmeneted"),
+        }
+    }
+
+    pub fn fold(self: &mut Self, fold: &Fold) {
+        let (fold_into, to_fold) = self.split_along(&fold);
+        self.board = fold_into;
+
+        match fold.axis {
+            Axis::Horizontal => {
+                let start = self.get_num_rows() - to_fold.len();
+                for to_fold_index in 0..to_fold.len() {
+                    let fold_into_index = start + to_fold_index;
+
+                    let fold_into = &mut self.board[fold_into_index];
+                    let to_fold = &to_fold[to_fold_index];
+
+                    for index in 0..fold_into.len() {
+                        if fold_into[index] == 1 || to_fold[index] == 1 {
+                            fold_into[index] = 1
+                        }
+                    }
+                }
+            }
+            Axis::Vertical => panic!("Not implemented"),
+        };
+    }
 }
