@@ -21,8 +21,8 @@ impl FromStr for Fold {
         let fold = binding.split("=").collect::<Vec<&str>>();
 
         let axis = match fold[0] {
-            "x" => Axis::Horizontal,
-            "y" => Axis::Vertical,
+            "y" => Axis::Horizontal,
+            "x" => Axis::Vertical,
             _ => panic!("Axis is not supported."),
         };
 
