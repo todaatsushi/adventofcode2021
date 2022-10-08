@@ -18,3 +18,19 @@ impl FromStr for Rule {
         })
     }
 }
+
+#[derive(Debug)]
+pub struct Polymer {
+    pub sequence: String,
+    pub rules: Vec<Rule>,
+}
+
+impl Polymer {
+    fn step(self: &mut Self) {}
+
+    pub fn run_steps(self: &mut Self, num_steps: i32) {
+        for _ in 0..num_steps {
+            self.step();
+        }
+    }
+}

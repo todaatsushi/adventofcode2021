@@ -1,4 +1,4 @@
-use crate::data::Rule;
+use crate::data::{Polymer, Rule};
 use std::env;
 
 #[derive(Debug)]
@@ -22,13 +22,15 @@ fn read_file() -> &'static str {
     content
 }
 
-pub fn read_input() -> (String, Vec<Rule>) {
-    let (start_polymer, rules_str) = read_file().split_once("\n\n").unwrap();
+pub fn read_input() -> Polymer {
+    let (sequence, rules_str) = read_file().split_once("\n\n").unwrap();
     let rules: Vec<Rule> = rules_str
         .lines()
         .map(str::parse)
         .map(Result::unwrap)
         .collect();
 
-    (start_polymer.to_string(), rules)
+    let sequence = sequence.to_string();
+
+    Polymer { sequence, rules }
 }
