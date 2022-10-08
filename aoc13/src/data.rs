@@ -129,7 +129,22 @@ impl Map {
 
                 (fold_into, to_fold)
             }
-            Axis::Vertical => panic!("Not implmeneted"),
+            Axis::Vertical => {
+                let mut fold_into: Vec<Vec<u32>> = Vec::new();
+                let mut to_fold: Vec<Vec<u32>> = Vec::new();
+
+                for row in &self.board {
+                    let before_split: Vec<u32> = row[0..fold.point].into();
+
+                    let mut after_split: Vec<u32> =
+                        row[fold.point as usize + 1..self.get_num_cols()].into();
+                    after_split.reverse();
+
+                    to_fold.push(after_split);
+                    fold_into.push(before_split);
+                }
+                (fold_into, to_fold)
+            }
         }
     }
 
@@ -153,7 +168,21 @@ impl Map {
                     }
                 }
             }
-            Axis::Vertical => panic!("Not implemented"),
+            Axis::Vertical => {
+                for row_num in 0..self.get_num_rows() {
+                    let to_fold_row = &to_fold[row_num];
+                    let start_point = self.get_num_cols() - to_fold_row.len();
+                    let fold_into_row = &mut self.board[row_num];
+
+                    for to_fold_index in 0..to_fold_row.len() {
+                        let fold_into_index = start_point + to_fold_index;
+
+                        if fold_into_row[fold_into_index] == 1 || to_fold_row[to_fold_index] == 1 {
+                            fold_into_row[fold_into_index] = 1;
+                        }
+                    }
+                }
+            }
         };
     }
 }
