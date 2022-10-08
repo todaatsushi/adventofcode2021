@@ -33,9 +33,26 @@ pub fn rules_to_hashmap(rules: Vec<Rule>) -> HashMap<String, char> {
 pub struct Polymer {
     pub sequence: String,
     pub rules: HashMap<String, char>,
+    pub tally: HashMap<char, u32>,
 }
 
 impl Polymer {
+    pub fn new(sequence: String, rules: Vec<Rule>) -> Self {
+        let rules = rules_to_hashmap(rules);
+
+        let mut tally: HashMap<char, u32> = HashMap::new();
+        for c in sequence.chars() {
+            let count = tally.entry(c).or_insert(0);
+            *count += 1;
+        }
+
+        Self {
+            sequence,
+            rules,
+            tally,
+        }
+    }
+
     fn step(self: &mut Self) {
         let (mut left, mut right) = (0 as usize, 2 as usize);
 
@@ -47,6 +64,9 @@ impl Polymer {
                     self.sequence.insert(left + 1 as usize, *c);
                     left += 2;
                     right = left + 2;
+
+                    let count = self.tally.entry(*c).or_insert(0);
+                    *count += 1;
                 }
                 None => {
                     left += 1;
