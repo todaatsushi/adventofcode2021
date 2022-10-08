@@ -1,6 +1,7 @@
 use std::str::FromStr;
 use std::string::ParseError;
 
+#[derive(Debug)]
 pub struct Rule {
     pattern: String,
     insert: String,
