@@ -76,7 +76,7 @@ impl Polymer {
         }
     }
 
-    pub fn run_steps(self: &mut Self, num_steps: i32) {
+    pub fn run_steps(self: &mut Self, num_steps: u32) {
         for _ in 0..num_steps {
             self.step();
         }
