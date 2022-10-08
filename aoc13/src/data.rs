@@ -1,13 +1,13 @@
 use std::str::FromStr;
 use std::string::ParseError;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 enum Axis {
     Horizontal,
     Vertical,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Fold {
     axis: Axis,
     point: usize,
