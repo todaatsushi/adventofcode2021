@@ -1,7 +1,10 @@
 use aoc14::input::read_input;
 
 fn main() {
-    let polymer = read_input();
+    let mut polymer = read_input();
+    polymer.run_steps(10);
 
-    println!("{:?}", polymer);
+    let max = polymer.tally.values().max().unwrap();
+    let min = polymer.tally.values().min().unwrap();
+    println!("Part 1: {}", max - min);
 }
