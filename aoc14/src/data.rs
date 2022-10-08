@@ -53,6 +53,11 @@ impl Polymer {
         }
     }
 
+    fn increment_tally(self: &mut Self, c: char) {
+        let count = self.tally.entry(c).or_insert(0);
+        *count += 1;
+    }
+
     fn step(self: &mut Self) {
         let (mut left, mut right) = (0 as usize, 2 as usize);
 
@@ -65,8 +70,7 @@ impl Polymer {
                     left += 2;
                     right = left + 2;
 
-                    let count = self.tally.entry(*c).or_insert(0);
-                    *count += 1;
+                    self.increment_tally(*c);
                 }
                 None => {
                     left += 1;
