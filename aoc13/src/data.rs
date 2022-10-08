@@ -119,6 +119,7 @@ impl Map {
     }
 
     fn split_along(self: &Self, fold: &Fold) -> (Vec<Vec<u32>>, Vec<Vec<u32>>) {
+        // TODO: Flip around to_fold & fold_into so that fold_into is the larger one
         match fold.axis {
             Axis::Horizontal => {
                 let fold_into: Vec<Vec<u32>> = self.board[0..fold.point].into();
