@@ -26,7 +26,21 @@ pub struct Polymer {
 }
 
 impl Polymer {
-    fn step(self: &mut Self) {}
+    fn step(self: &mut Self) {
+        let (mut left, mut right) = (0 as usize, 2 as usize);
+
+        while right <= self.sequence.len() && left < right {
+            let subpattern = self.sequence[left..right].to_string();
+
+            for rule in &self.rules {
+                if subpattern == rule.pattern {
+                    self.sequence.insert(left + 1 as usize, rule.insert);
+                    left += 2;
+                    right = left + 2;
+                }
+            }
+        }
+    }
 
     pub fn run_steps(self: &mut Self, num_steps: i32) {
         for _ in 0..num_steps {
