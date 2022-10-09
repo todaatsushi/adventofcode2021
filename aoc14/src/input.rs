@@ -4,7 +4,7 @@ use std::env;
 #[derive(Debug)]
 enum InputError {
     FileDoesntExist,
-    Needs2Args,
+    Needs3Args,
 }
 
 fn read_file() -> &'static str {
@@ -15,7 +15,7 @@ fn read_file() -> &'static str {
             "puzzle" => Ok(include_str!("../inputs/puzzle.txt")),
             _ => Err(InputError::FileDoesntExist),
         },
-        _ => Err(InputError::Needs2Args),
+        _ => Err(InputError::Needs3Args),
     }
     .unwrap();
 
