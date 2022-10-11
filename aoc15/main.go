@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"os"
+)
 
 func main() {
-	fmt.Println("Hello, world!")
+	numArgs := len(os.Args)
+	if numArgs < 2 {
+		log.Fatal("Not enough args.")
+	}
+
+	filename := os.Args[1]
+
+	fmt.Println("File:", filename)
 }
