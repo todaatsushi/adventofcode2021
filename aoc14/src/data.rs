@@ -99,4 +99,37 @@ impl Polymer {
             self.step();
         }
     }
+
+    pub fn count_chars(self: &Self) {
+        let mut counts: HashMap<String, u64> = HashMap::new();
+        for (pair, count) in self.tally.iter().filter(|(_, count)| count > &&0) {
+            let c = pair.chars().last().unwrap();
+            let current = counts.entry(c.to_string()).or_insert(0);
+            *current += count;
+        }
+        let c = self.sequence.chars().next().unwrap();
+        let current = counts.entry(c.to_string()).or_insert(0);
+        *current += 1;
+
+        println!("Char counts: {:?}", counts);
+
+        let mut max: u64 = *counts.values().next().unwrap();
+        let mut min: u64 = *counts.values().next().unwrap();
+
+        for count in counts.values() {
+            if max < *count {
+                max = *count;
+            }
+
+            if min > *count {
+                min = *count;
+            }
+        }
+        println!(
+            "Difference between max and min: {} ({}, {})",
+            max - min,
+            max,
+            min
+        );
+    }
 }
