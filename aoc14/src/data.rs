@@ -33,16 +33,17 @@ pub fn rules_to_hashmap(rules: Vec<Rule>) -> HashMap<String, char> {
 pub struct Polymer {
     pub sequence: String,
     pub rules: HashMap<String, char>,
-    pub tally: HashMap<char, u32>,
+    pub tally: HashMap<String, u32>,
 }
 
 impl Polymer {
     pub fn new(sequence: String, rules: Vec<Rule>) -> Self {
         let rules = rules_to_hashmap(rules);
 
-        let mut tally: HashMap<char, u32> = HashMap::new();
-        for c in sequence.chars() {
-            let count = tally.entry(c).or_insert(0);
+        let mut tally: HashMap<String, u32> = HashMap::new();
+        for index in 0..sequence.len() - 1 {
+            let substr = &sequence[index..index + 2].to_string();
+            let count = tally.entry(substr.to_string()).or_insert(0);
             *count += 1;
         }
 
