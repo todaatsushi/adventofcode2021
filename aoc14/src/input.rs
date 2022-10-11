@@ -1,4 +1,4 @@
-use crate::data::{Polymer, Rule};
+use crate::data::{polymer::Polymer, rule::Rule};
 use std::env;
 
 #[derive(Debug)]
