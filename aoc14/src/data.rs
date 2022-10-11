@@ -64,24 +64,31 @@ impl Polymer {
     }
 
     fn step(self: &mut Self) {
-        let (mut left, mut right) = (0 as usize, 2 as usize);
+        let mut new_tally_items: HashMap<String, u64> = HashMap::new();
 
-        while right <= self.sequence.len() && left < right {
-            let subpattern = self.sequence[left..right].to_string();
+        let elems_to_split = self
+            .tally
+            .iter_mut()
+            .filter(|(_, count)| *count > &mut 0)
+            .filter(|(pair, _)| self.rules.contains_key(*pair));
 
-            match self.rules.get(&subpattern) {
-                Some(c) => {
-                    self.sequence.insert(left + 1 as usize, *c);
-                    left += 2;
-                    right = left + 2;
+        for (pair, count) in elems_to_split {
+            let to_insert = self.rules.get(pair).unwrap();
 
-                    self.increment_tally(*c);
-                }
-                None => {
-                    left += 1;
-                    right += 1;
-                }
-            };
+            // Create the new pairs (ie. pair[0] + to_insert, to_insert + pair[1]) and
+            // add to new tally.
+            let mut prepended: String = to_insert.clone().to_string();
+            prepended.push(pair.chars().last().unwrap());
+
+            let mut appended: String = pair.chars().next().unwrap().to_string();
+            appended.push(to_insert.clone());
+
+            for new_item in [appended, prepended] {
+                let new_count = new_tally_items.entry(new_item).or_insert(0);
+                *new_count += *count;
+            }
+
+            *count = 0;
         }
 
         self.update_tally(new_tally_items);
