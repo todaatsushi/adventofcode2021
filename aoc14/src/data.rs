@@ -54,9 +54,13 @@ impl Polymer {
         }
     }
 
-    fn increment_tally(self: &mut Self, c: char) {
-        let count = self.tally.entry(c).or_insert(0);
-        *count += 1;
+    fn update_tally(self: &mut Self, new_tally: HashMap<String, u64>) {
+        for (pair, count) in new_tally {
+            self.tally
+                .entry(pair)
+                .and_modify(|c| *c += count)
+                .or_insert(count);
+        }
     }
 
     fn step(self: &mut Self) {
@@ -79,6 +83,8 @@ impl Polymer {
                 }
             };
         }
+
+        self.update_tally(new_tally_items);
     }
 
     pub fn run_steps(self: &mut Self, num_steps: u64) {
