@@ -6,6 +6,17 @@ import (
 	"strings"
 )
 
+func getCoordinateModifiers() [4][2]int {
+	var moves [4][2]int
+
+	moves[0] = [2]int{1, 0}
+	moves[1] = [2]int{-1, 0}
+	moves[2] = [2]int{0, 1}
+	moves[3] = [2]int{0, -1}
+
+	return moves
+}
+
 type Grid struct {
 	points [][]int
 }
